@@ -1,0 +1,11 @@
+[
+ "Buffer overflow in image processing causing remote code execution or DoS — An attacker crafts an image to cause buffer overflow in image processing, leading to potential remote code execution, denial of service, and errors.",
+ "Supply chain attack on third-party libraries compromising system outputs — An attacker poisons the supply chain of third-party libraries, leading to network or system compromise.",
+ "Image Tampering — An attacker tampers with or deletes stored images to impact training or testing results and/or cause denial of service.",
+ "Notebook tampering to insert a backdoor — An attacker modifies a notebook file to insert a backdoor, such as a keylogger or data stealer.",
+ "Machine learning model tampering causing low accuracy or IP theft — An attacker or insider modifies or reads persisted model files to steal intellectual property or degrade prediction accuracy.",
+ "Image perturbation attack resulting in incorrect classifications — An attacker uses brute force with random or systematic perturbations to create images that lead to incorrect classifications.",
+ "Sensitive image exposure due to accidental access — An attacker or malicious insider gains access to sensitive uploaded images.",
+ "SSH compromise via stolen credentials from developer machine — An attacker compromises a developer machine to steal SSH keys, impersonate users, or escalate privileges.",
+ "SSH compromise via open port vulnerability — An attacker exploits an open SSH port to escalate privileges or impersonate authorized users."
+]

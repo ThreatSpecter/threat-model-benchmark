@@ -1,0 +1,8 @@
+{
+ "id": "ietf-dns",
+ "tier": "ietf",
+ "system": "The Domain Name System",
+ "source": "RFC 1034 \u2192 RFC 3833",
+ "expected": 7,
+ "design_words": 16566
+}

@@ -1,0 +1,8 @@
+{
+ "id": "acse-sports-betting-system",
+ "tier": "acse",
+ "system": "sports betting system \u2014 an AWS deployment (sports betting system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval sports-betting-system",
+ "expected": 5,
+ "design_words": 4521
+}

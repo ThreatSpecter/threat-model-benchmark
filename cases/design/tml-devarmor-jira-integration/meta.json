@@ -1,0 +1,8 @@
+{
+ "id": "tml-devarmor-jira-integration",
+ "tier": "tml",
+ "system": "DevArmor-Forge App Integration \u2014 The scope is the integration of the Forge-based Jira Cloud application that lets developers request secure design reviews and synchronizes tenant metadata with the DevArmor backend. The DevArmor Forge App extends Jira Cloud so customers' product teams can raise secur",
+ "source": "OWASP TML",
+ "expected": 4,
+ "design_words": 213
+}

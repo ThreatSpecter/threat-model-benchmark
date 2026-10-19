@@ -1,0 +1,8 @@
+{
+ "id": "cncf-cortex",
+ "tier": "cncf",
+ "system": "# STRIDE Threat Model ### 1. Spoofing: - **Threat:** Unauthorized access to Cortex components or data. - **Application to Cortex:** Previously considered out of scope. Kubernetes network policies can restrict component access. - **Mitigation:** Implementation and fine-tuning of Kubernetes network po",
+ "source": "cortex/threat-model.md",
+ "expected": 6,
+ "design_words": 2017
+}

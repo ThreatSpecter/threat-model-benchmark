@@ -1,0 +1,8 @@
+{
+ "id": "acse-gaming-screenshot-processor",
+ "tier": "acse",
+ "system": "Serverless In-Game Screenshot Processor \u2014 an AWS deployment (gaming screenshot processor): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval gaming-screenshot-processor",
+ "expected": 7,
+ "design_words": 2345
+}

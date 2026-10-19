@@ -1,0 +1,802 @@
+{
+ "repo": "nats-io/nats-server",
+ "fetched": "2026-10-06T23:57:00+00:00",
+ "source": "GitHub Advisory Database (CC BY 4.0) and the repository's own advisories",
+ "advisories": [
+  {
+   "ghsa": "GHSA-q59r-vq66-pxc2",
+   "cve": "CVE-2026-58207",
+   "summary": "Remote crash via integer overflow in Connz pagination",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server exposes account-scoped monitoring requests through system subjects, including connection information for the requesting account.\r\n\r\n### Problem Description\r\n\r\nA client able to send account-scoped connection monitoring requests could crash the server by supplying pagination values that overflowed internal arithmetic.\r\n\r\nThe affected request path is normally scoped to the requester's own account, but the overflow occurred before the response window was safely bounded.\r\n\r\nOn no-auth deployments, any client with network access to the client listener could reach this path. In multi-tenant deployments, impact depends on whether a tenant can publish to the imported account monitoring request subject.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.14.2, v2.12.11 and below are vulnerable. The issue is fixed in v2.14.3 and v2.12.12.\r\n\r\n### Workarounds\r\n\r\nRestrict publish access to system request subjects for untrusted users. Avoid no-auth deployments where untrusted clients can publish to system request subjects.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-q59r-vq66-pxc2>\r\n * Credit: @larrasket",
+   "severity": "high",
+   "published": "2026-06-29T15:54:23Z",
+   "cwes": [],
+   "ranges": [
+    "<= 2.14.2, <= 2.12.11"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-p957-7v2w-g93g",
+   "cve": "CVE-2026-58208",
+   "summary": "MQTT-over-WebSocket Path Can Crash WebSocket-Only JetStream Servers Before MQTT Is Enabled",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server can accept client connections over WebSocket and can also support MQTT over WebSocket when MQTT is configured.\r\n\r\n### Problem Description\r\n\r\nA WebSocket listener could route requests for the MQTT-over-WebSocket path into MQTT handling even when MQTT was not configured.\r\n\r\nOn affected deployments, an unauthenticated client with access to the WebSocket listener could reach uninitialized MQTT state and crash the server process.\r\n\r\nThis affects deployments that enable WebSocket while leaving MQTT disabled. Deployments where MQTT is intentionally configured initialize the MQTT state and are not affected in the same way.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.14.2, v2.12.11 and below are vulnerable. The issue is fixed in v2.14.3 and v2.12.12.\r\n\r\n### Workarounds\r\n\r\nDeployments not using WebSocket are not affected. Deployments using both WebSockets and MQTT are not affected. No known workaround for deployments that need WebSocket without MQTT-over-WebSocket. Upgrade to a fixed release.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-p957-7v2w-g93g>\r\n * Credit: Vasco Franco, Trail of Bits\r\n",
+   "severity": "medium",
+   "published": "2026-06-29T15:54:19Z",
+   "cwes": [
+    "CWE-248"
+   ],
+   "ranges": [
+    "<= 2.14.2, <= 2.12.11"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-7qmq-8cc4-hxwg",
+   "cve": "CVE-2026-58209",
+   "summary": "MQTT retained and QoS replay bypass subscribe deny filters",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server MQTT support includes retained messages and QoS1+ durable delivery. NATS subscription permissions can allow broad wildcard subscriptions while denying more sensitive subjects.\r\n\r\n### Problem Description\r\n\r\nMQTT retained message delivery and QoS1+ durable replay could deliver messages whose original topics matched a subscriber's configured subscribe deny rules.\r\n\r\nNormal live delivery applied the delivery-time deny check. These MQTT delivery paths did not consistently recheck the concrete original topic before sending the MQTT `PUBLISH` to the subscriber.\r\n\r\nThe issue affects MQTT subscribers with broad wildcard subscribe permissions where more specific topics are denied. Normal live delivery can be blocked while retained or replayed delivery still sends the denied topic.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.14.2, v2.12.11 and below are vulnerable. The issue is fixed in v2.14.3 and v2.12.12.\r\n\r\n### Workarounds\r\n\r\nNo known workaround for deployments that require MQTT. Upgrade to a fixed release. Deployments not using MQTT are not affected.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-7qmq-8cc4-hxwg>\r\n * Credit: Asritha Bodepudi, Trail of Bits\r\n",
+   "severity": "medium",
+   "published": "2026-06-29T15:54:13Z",
+   "cwes": [
+    "CWE-863"
+   ],
+   "ranges": [
+    "<= 2.14.2, <= 2.12.11"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-r72h-j7qq-v6qg",
+   "cve": "CVE-2026-58210",
+   "summary": "MQTT partial CONNECT packets can exhaust pre-auth memory",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server supports MQTT clients, including authentication and parsing of MQTT `CONNECT` packets.\r\n\r\n### Problem Description\r\n\r\nAn unauthenticated MQTT client could cause the server to retain large incomplete MQTT `CONNECT` packets before authentication completed.\r\n\r\nThe parser retained partial pre-authentication packet data while waiting for the advertised MQTT packet length to be completed. An attacker could therefore consume server memory until authentication timeouts closed the connections.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.14.2, v2.12.11 and below are vulnerable. The issue is fixed in v2.14.3 and v2.12.12.\r\n\r\n### Workarounds\r\n\r\nDeployments not using MQTT are not affected. Deployments that need MQTT should upgrade to a fixed release.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-r72h-j7qq-v6qg>\r\n * Credit: Asritha Bodepudi, Trail of Bits\r\n",
+   "severity": "high",
+   "published": "2026-06-29T15:54:07Z",
+   "cwes": [
+    "CWE-400"
+   ],
+   "ranges": [
+    "<= 2.14.2, <= 2.12.11"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-hmmp-q8cx-v964",
+   "cve": "CVE-2026-58211",
+   "summary": "`no_auth_user` pre-CONNECT fast path bypasses user connection restrictions",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server can map clients that do not send credentials to a configured `no_auth_user`. Users can also be limited to specific connection types or required to connect through a trusted proxy.\r\n\r\n### Problem Description\r\n\r\nA client could be registered as the configured `no_auth_user` through a parser path used when the first client operation was not `CONNECT`.\r\n\r\nThat path did not apply the same user-level connection restrictions as normal authentication. As a result, an unauthenticated client could receive the permissions of a default user that was intended to be usable only through a specific connection type or trusted proxy.\r\n\r\nThe issue affects deployments that use `no_auth_user` together with restrictions such as `allowed_connection_types` or `proxy_required`.\r\n\r\nImpact depends on the permissions granted to the configured `no_auth_user`.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.14.2, v2.12.11 and below are vulnerable. The issue is fixed in v2.14.3 and v2.12.12.\r\n\r\n### Workarounds\r\n\r\nAvoid configuring `no_auth_user` with permissions that rely on `allowed_connection_types` or `proxy_required` as the only boundary.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-hmmp-q8cx-v964>\r\n * Credit: Asritha Bodepudi, Trail of Bits\r\n",
+   "severity": "medium",
+   "published": "2026-06-29T15:53:59Z",
+   "cwes": [
+    "CWE-863"
+   ],
+   "ranges": [
+    "<= 2.14.2, <= 2.12.11"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-g33f-6538-grxh",
+   "cve": "CVE-2026-58212",
+   "summary": "Pre-auth panic and server hang via malformed JWT issuer (missing Ed25519 length check in nkeys)",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server can run in operator mode, deriving client identities and permissions from JWT credentials signed with NKEYs.\r\n\r\n### Problem Description\r\n\r\nAn unauthenticated client could cause an operator-mode NATS Server to panic while processing a client JWT before authentication completed.\r\n\r\nThe issue involved accepting a truncated public account key, which could later reach Ed25519 signature verification with an invalid length. The malformed key was taken from JWT claims processed during authentication before a client identity had been established.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.14.1, v2.12.9 and below are vulnerable. The issue is fixed in v2.14.2 and v2.12.10.\r\n\r\n### Workarounds\r\n\r\nNo known workaround for operator-mode deployments using JWT authentication. Upgrade to a fixed release.\r\n\r\nDeployments not using operator-mode JWT authentication are not affected by this issue.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-g33f-6538-grxh>\r\n * Credit: @queencitycyber\r\n",
+   "severity": "high",
+   "published": "2026-06-29T15:53:49Z",
+   "cwes": [
+    "CWE-617"
+   ],
+   "ranges": [
+    "v0.4.15 and earlier, including main",
+    "<= 2.14.1, <= 2.12.9"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-qrcv-3558-gj4f",
+   "cve": "CVE-2026-58213",
+   "summary": "MQTT SUBSCRIBE Protocol Injection via Leaf Node/Route Forwarding allows arbitrary NATS command injection (CWE-74)",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server supports MQTT clients and can bridge MQTT activity into NATS subjects across routes and leafnode connections.\r\n\r\n### Problem Description\r\n\r\nAn MQTT client could include protocol control characters in subscription filters that were later forwarded as NATS protocol data to route or leafnode connections.\r\n\r\nThis could corrupt the forwarded protocol stream and allow injection of unintended NATS protocol operations, potentially across cluster nodes or accounts where route or gateway connections are present.\r\n\r\nAnonymous MQTT deployments are higher risk because no credentials are required to reach the affected parser. Authenticated deployments are still affected for clients allowed to create MQTT subscriptions.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.14.0, v2.12.8 and below are vulnerable. The issue is fixed in v2.14.1 and v2.12.9.\r\n\r\n### Workarounds\r\n\r\nDisable anonymous MQTT access where it is not required. Deployments that need MQTT have no known complete workaround other than upgrading.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-qrcv-3558-gj4f>\r\n * Credit: @thesecguy45\r\n",
+   "severity": "high",
+   "published": "2026-06-29T15:53:40Z",
+   "cwes": [],
+   "ranges": [
+    "<= 2.14.0, <= 2.12.8"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-4g68-3pwx-5vfj",
+   "cve": "CVE-2026-58214",
+   "summary": "MQTT subscribe ACL bypass via $MQTT.deliver.pubrel prefix (incomplete fix for CVE-2026-33217)",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server MQTT support uses internal `$MQTT.*` subjects to implement MQTT protocol features such as QoS handling.\r\n\r\n### Problem Description\r\n\r\nAn authenticated MQTT client could subscribe to an internal MQTT delivery subject that was not intended to be available to clients.\r\n\r\nThis bypassed configured subscribe permissions for that internal subject family and exposed MQTT QoS2 protocol metadata for sessions in the account. Message payloads were not exposed through this path.\r\n\r\nThis issue was related to an incomplete restriction on internal MQTT subjects. It affected MQTT users whose ordinary subscribe permissions would not otherwise allow access to those internal subjects.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.14.2, v2.12.7 and below are vulnerable. The issue is fixed in v2.14.3 and v2.12.8.\r\n\r\n### Workarounds\r\n\r\nNo known workaround for deployments that require MQTT. Upgrade to a fixed release. Deployments not using MQTT are not affected.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-4g68-3pwx-5vfj>\r\n * Credit: Koda Reef\r\n",
+   "severity": "medium",
+   "published": "2026-06-29T15:53:34Z",
+   "cwes": [
+    "CWE-863"
+   ],
+   "ranges": [
+    "<= 2.14.2, <= 2.12.7"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-p3j5-5hrq-p75h",
+   "cve": "CVE-2026-58254",
+   "summary": "Incomplete fix for CVE-2026-33249: Leaf node connections bypass Nats-Trace-Dest permission check",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server supports leafnode connections between servers and message tracing through NATS headers.\r\n\r\n### Problem Description\r\n\r\nMessage trace destination checks were applied to ordinary client connections but not consistently to messages arriving through leafnode connections.\r\n\r\nA leafnode operator could cause trace events to be sent to subjects that would not otherwise be permitted and could use trace-only behavior to prevent normal delivery or storage of affected messages.\r\n\r\nTrace events can include routing, subscription, account, service import and JetStream metadata. The payload of the original application message is not chosen through the trace event itself.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.14.2, v2.12.7 and below are vulnerable. The issue is fixed in v2.14.3 and v2.12.8.\r\n\r\n### Workarounds\r\n\r\nWhere possible, avoid granting publish paths from less-trusted leaf nodes into subjects for which trace-only behavior would affect delivery guarantees. No other known workarounds are available aside from upgrading to a fixed release.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-p3j5-5hrq-p75h>\r\n * Credit: Koda Reef\r\n",
+   "severity": "medium",
+   "published": "2026-06-29T15:53:28Z",
+   "cwes": [
+    "CWE-863"
+   ],
+   "ranges": [
+    "<= 2.14.2, <= 2.12.7"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-3g5q-cfh2-cq67",
+   "cve": "CVE-2026-58250",
+   "summary": "Pre-auth server crash via double INFO in leafnode handshake — incomplete fix for CVE-2026-29785 and CVE-2026-33218",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server supports leafnode connections between servers.\r\n\r\n### Problem Description\r\n\r\nAn unauthenticated peer with network access to a leafnode listener with compression enabled could crash the server during the pre-authentication leafnode handshake.\r\n\r\nThe issue occurs after repeated leafnode `INFO` protocol messages before a leafnode connection had completed authentication and account setup. Certain state expected later in the handshake could be nil and then later dereferenced, causing a process panic.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.12.7, v2.11.16 and below are vulnerable. The issue is fixed in v2.12.8 and v2.11.17.\r\n\r\n### Workarounds\r\n\r\nDisabling leafnode compression can mitigate the issue until fixed versions are deployed.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-3g5q-cfh2-cq67>\r\n * Credit: Koda Reef\r\n",
+   "severity": "high",
+   "published": "2026-06-29T15:53:18Z",
+   "cwes": [
+    "CWE-476"
+   ],
+   "ranges": [
+    "<= 2.12.7, <= 2.11.16"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-jx8g-9g95-6322",
+   "cve": "CVE-2026-58251",
+   "summary": "Queue Subscribe Authz Bypass ",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server permission system supports subject-based allow and deny rules for subscriptions, including queue subscriptions.\r\n\r\n### Problem Description\r\n\r\nAn authenticated user with a specific combination of subscription deny permissions could bypass a plain subject deny rule by using a queue subscription.\r\n\r\nThe queue-specific deny evaluation could override the result of a plain subject deny evaluation, allowing the subscription to proceed when the queue name itself was not denied.\r\n\r\nThis could allow the user to receive messages on subjects that the account configuration intended to deny.\r\n\r\nThis requires the affected user to have valid credentials and permissions that combine plain subject denies with queue-specific deny rules.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.12.6, v2.11.15 and below are vulnerable. The issue is fixed in v2.14.0, v2.12.7 and v2.11.16.\r\n\r\n### Workarounds\r\n\r\nReview users that combine plain subscription deny rules with queue-specific deny rules. Where possible, avoid granting broad subscription permissions to users that also depend on queue-specific deny rules until upgraded.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-jx8g-9g95-6322>\r\n * Credit: XlabAI Team of Tencent Xuanwu Lab\r\n",
+   "severity": "medium",
+   "published": "2026-06-29T11:24:35Z",
+   "cwes": [
+    "CWE-285"
+   ],
+   "ranges": [
+    "<= 2.12.6, <= 2.11.15"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-wh7g-5m82-pmhr",
+   "cve": "CVE-2026-58252",
+   "summary": "Subscribe Authz Bypass via Wildcard-Overlap",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server permission system supports wildcard subscription permissions, with deny rules taking precedence over allow rules.\r\n\r\n### Problem Description\r\n\r\nAn authenticated user could receive messages on denied subjects when a wildcard subscription overlapped with a configured wildcard deny rule but was not a subset of it. If the subscription was a queue subscription, this could also affect delivery to legitimate queue consumers.\r\n\r\nThe issue requires valid credentials and a permission configuration with overlapping wildcard allow and deny patterns.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.12.6, v2.11.15 and below are vulnerable. The issue is fixed in v2.14.0, v2.12.7 and v2.11.16.\r\n\r\n### Workarounds\r\n\r\nUpgrade to a fixed release.\r\n\r\n### References\r\n\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-wh7g-5m82-pmhr>\r\n * Credit: XlabAI Team of Tencent Xuanwu Lab",
+   "severity": "medium",
+   "published": "2026-06-29T11:24:17Z",
+   "cwes": [
+    "CWE-285"
+   ],
+   "ranges": [
+    "<= 2.12.6, <= 2.11.15"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-38x3-76xf-cq45",
+   "cve": "CVE-2026-58253",
+   "summary": "Route API Auth Bypass",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT and edge computing.\r\n\r\nThe NATS Server supports clusters, gateways and leaf nodes for distributed deployments. These listener types have their own authentication and protocol handling.\r\n\r\n### Problem Description\r\n\r\nWhen `no_auth_user` was configured, a parser fast path intended for ordinary client connections could also apply to some inter-server connection types.\r\n\r\nAn unauthenticated peer with network access to an affected route or leafnode listener could bypass the expected inter-server authentication step and operate with privileges associated with that connection type.\r\n\r\nThe issue was triggered before the inter-server `CONNECT` authentication flow completed, so the peer did not need valid route or leafnode credentials.\r\n\r\n### Affected Versions\r\n\r\nVersions v2.12.6, v2.11.15 and below are vulnerable. The issue is fixed in v2.14.0, v2.12.7 and v2.11.16.\r\n\r\n### Workarounds\r\n\r\nDo not combine `no_auth_user` with route or leafnode listeners until upgraded.\r\n\r\n### References\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-38x3-76xf-cq45>\r\n * Credit: XlabAI Team of Tencent Xuanwu Lab",
+   "severity": "high",
+   "published": "2026-06-29T11:23:12Z",
+   "cwes": [
+    "CWE-287"
+   ],
+   "ranges": [
+    "<= 2.12.6, <= 2.11.15"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-8m2x-3m6q-6w8j",
+   "cve": "CVE-2026-33249",
+   "summary": "Message tracing can be redirected to arbitrary subject",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nThe nats-server supports telemetry on messages, using the per-message NATS headers.\r\n\r\n### Problem Description\r\n\r\nA valid client which uses message tracing headers can indicate that the trace messages can be sent to an arbitrary valid subject, including those to which the client does not have publish permission.\r\n\r\nThe payload is a valid trace message and not chosen by the attacker.\r\n\r\n### Affected Versions\r\n\r\nAny version before v2.12.6 or v2.11.15\r\n\r\n### Workarounds\r\n\r\nNone.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-15.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-8m2x-3m6q-6w8j>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33249>",
+   "severity": "medium",
+   "published": "2026-03-24T20:20:44Z",
+   "cwes": [
+    "CWE-863"
+   ],
+   "ranges": [
+    ">= 2.11.0, <= 2.11.14, <= 2.12.5"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-x6g4-f6q3-fqvv",
+   "cve": "CVE-2026-33247",
+   "summary": "credentials via command-line argv exposed to monitoring",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nThe nats-server provides an optional monitoring port, which provides access to sensitive data.  The nats-server can take certain configuration options on the command-line instead of requiring a configuration file.\r\n\r\n\r\n### Problem Description\r\n\r\nIf a nats-server is run with static credentials for all clients provided via argv (the command-line), then those credentials are visible to any user who can see the monitoring port, if that too is enabled.\r\n\r\nThe `/debug/vars` end-point contains an unredacted copy of argv.\r\n\r\n### Affected Versions\r\n\r\nFixed in nats-server 2.12.6 & 2.11.15\r\n\r\n### Workarounds\r\n\r\nThe NATS Maintainers are bemused at the concept of someone deploying a real configuration using `--pass` to avoid a config file, but also enabling monitoring.\r\n\r\nConfigure credentials inside a configuration file instead of via argv.\r\n\r\nDo not enable the monitoring port if using secrets in argv.\r\n\r\nBest practice remains to not expose the monitoring port to the Internet, or to untrusted network sources.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-14.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-x6g4-f6q3-fqvv>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33247>",
+   "severity": "high",
+   "published": "2026-03-24T20:25:16Z",
+   "cwes": [
+    "CWE-215"
+   ],
+   "ranges": [
+    "<= 2.12.5, <= 2.11.14"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-3f24-pcvm-5jqc",
+   "cve": "CVE-2026-33248",
+   "summary": "mTLS DN-based identity auth bypass for some DN patterns",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nOne authentication model supported is mTLS, deriving the NATS client identity from properties of the TLS Client Certificate.\r\n\r\n### Problem Description\r\n\r\nWhen using mTLS for client identity, with `verify_and_map` to derive a NATS identity from the client certificate's Subject DN, certain patterns of RDN would not be correctly enforced, allowing for authentication bypass.\r\n\r\nThis does require a valid certificate from a CA already trusted for client certificates, and `DN` naming patterns which the NATS maintainers consider highly unlikely.\r\n\r\nSo this is an unlikely attack. Nonetheless, administrators who have been very sophisticated in their `DN` construction patterns might conceivably be impacted.\r\n\r\n### Affected Versions\r\n\r\nFixed in nats-server 2.12.6 & 2.11.15\r\n\r\n### Workarounds\r\n\r\nReview your CA issuing practices.\r\n\r\n### References\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-13.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-3f24-pcvm-5jqc>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33248>",
+   "severity": "medium",
+   "published": "2026-03-24T20:27:57Z",
+   "cwes": [
+    "CWE-287",
+    "CWE-295"
+   ],
+   "ranges": [
+    "<= 2.12.5, <= 2.11.14"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-9983-vrx2-fg9c",
+   "cve": "CVE-2026-33222",
+   "summary": "JetStream: Stream restore endpoint auth bypass",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nThe persistent storage feature, JetStream, has a management API which has many features, amongst which are backup and restore.\r\n\r\n### Problem Description\r\n\r\nUsers with JetStream admin API access to restore one stream could restore to other stream names, impacting data which should have been protected against them.\r\n\r\n### Affected Versions\r\n\r\nAny version before v2.12.6 or v2.11.15\r\n\r\n### Workarounds\r\n\r\nIf you have Users who have limited JetStream restore permissions, temporarily remove those permissions.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-12.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-9983-vrx2-fg9c>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33222>\r\n",
+   "severity": "medium",
+   "published": "2026-03-24T20:29:42Z",
+   "cwes": [
+    "CWE-285"
+   ],
+   "ranges": [
+    "<= 2.12.5, <= 2.11.14"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-pwx7-fx9r-hr4h",
+   "cve": "CVE-2026-33223",
+   "summary": "Internal identity header Nats-Request-Info spoofable",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nThe nats-server offers a `Nats-Request-Info:` message header, providing information about a request.\r\n\r\n### Problem Description\r\n\r\nThe NATS message header `Nats-Request-Info:` is supposed to be a guarantee of identity by the NATS server, but the stripping of this header from inbound messages was not fully effective.\r\n\r\nAn attacker with valid credentials for any regular client interface could thus spoof their identity to services which rely upon this header.\r\n\r\n### Affected Versions\r\n\r\nAny version before v2.12.6 or v2.11.15\r\n\r\n### Workarounds\r\n\r\nNone.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-09.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-pwx7-fx9r-hr4h>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33223>",
+   "severity": "medium",
+   "published": "2026-03-24T20:35:53Z",
+   "cwes": [
+    "CWE-290"
+   ],
+   "ranges": [
+    "<= 2.12.5, <= 2.11.14"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-8r68-gvr4-jh7j",
+   "cve": "CVE-2026-33219",
+   "summary": "WebSockets pre-auth DoS",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nThe nats-server offers a WebSockets client service, used in deployments where browsers are the NATS clients.\r\n\r\n### Problem Description\r\n\r\nA malicious client which can connect to the WebSockets port can cause unbounded memory use in the nats-server before authentication; this requires sending a corresponding amount of data.\r\n\r\nThis is a milder variant of [NATS-advisory-ID 2026-02](https://advisories.nats.io/CVE/secnote-2026-02.txt) (aka CVE-2026-27571; GHSA-qrvq-68c2-7grw).\r\nThat earlier issue was a compression bomb, this vulnerability is not.\r\nAttacks against this new issue thus require significant client bandwidth.\r\n\r\n### Affected Versions\r\n\r\nAny version before v2.12.6 or v2.11.15\r\n\r\n### Workarounds\r\n\r\nDisable websockets if not required for your deployment.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-11.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-8r68-gvr4-jh7j>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33219>\r\n",
+   "severity": "medium",
+   "published": "2026-03-24T20:32:20Z",
+   "cwes": [
+    "CWE-770"
+   ],
+   "ranges": [
+    "<= 2.12.5, <= 2.11.14"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-vprv-35vv-q339",
+   "cve": "CVE-2026-33218",
+   "summary": "Pre-auth server panic in leafnode handling",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nThe nats-server allows hub/spoke topologies using \"leafnode\" connections by other nats-servers.\r\n\r\n### Problem Description\r\n\r\nA client which can connect to the leafnode port can crash the nats-server with a certain malformed message pre-authentication.\r\n\r\n### Affected Versions\r\n\r\nAny version before v2.12.6 or v2.11.15\r\n\r\n### Workarounds\r\n\r\n1. Disable leafnode support if not needed.\r\n2. Restrict network connections to your leafnode port, if plausible without compromising the service offered.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-10.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-vprv-35vv-q339>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33218>",
+   "severity": "high",
+   "published": "2026-03-24T20:34:03Z",
+   "cwes": [
+    "CWE-20"
+   ],
+   "ranges": [
+    "<= 2.12.5, <= 2.11.14"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-55h8-8g96-x4hj",
+   "cve": "CVE-2026-33246",
+   "summary": "Leafnode spoofing of Nats-Request-Info identity information",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nThe nats-server allows hub/spoke topologies using \"leafnode\" connections by other nats-servers.  NATS messages can have headers.\r\n\r\n### Problem Description\r\n\r\nThe nats-server offers a `Nats-Request-Info:` message header, providing information about a request.  This is supposed to provide enough information to allow for account/user identification, such that NATS clients could make their own decisions on how to trust a message, provided that they trust the nats-server as a broker.\r\n\r\nA leafnode connecting to a nats-server is not fully trusted unless the system account is bridged too.  Thus identity claims should not have propagated unchecked.\r\n\r\nThus NATS clients relying upon the Nats-Request-Info: header could be spoofed.\r\n\r\nDoes not directly affect the nats-server itself, but the CVSS Confidentiality and Integrity scores are based upon what a hypothetical client might choose to do with this NATS header.\r\n\r\n### Affected Versions\r\n\r\nAny version before v2.12.6 or v2.11.15\r\n\r\n### Workarounds\r\n\r\nNone.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-08.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-55h8-8g96-x4hj>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33246>",
+   "severity": "medium",
+   "published": "2026-03-24T20:38:04Z",
+   "cwes": [
+    "CWE-287",
+    "CWE-290"
+   ],
+   "ranges": [
+    "<= 2.12.5, <= 2.11.14"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-jxxm-27vp-c3m5",
+   "cve": "CVE-2026-33217",
+   "summary": "MQTT ACLs ineffective",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nThe nats-server provides an MQTT client interface.\r\n\r\n### Problem Description\r\n\r\nWhen using ACLs on message subjects, these ACLs were not applied in the `$MQTT.>` namespace, allowing MQTT clients to bypass ACL checks for MQTT subjects.\r\n\r\n### Affected Versions\r\n\r\nAny version before v2.12.6 or v2.11.15\r\n\r\n### Workarounds\r\n\r\nNone.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-07.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-jxxm-27vp-c3m5>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33217>",
+   "severity": "high",
+   "published": "2026-03-24T20:39:35Z",
+   "cwes": [
+    "CWE-863"
+   ],
+   "ranges": [
+    "<= 2.12.5, <= 2.11.14"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-v722-jcv5-w7mc",
+   "cve": "CVE-2026-33216",
+   "summary": "MQTT plaintext password disclosure",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nThe nats-server provides an MQTT client interface.\r\n\r\n### Problem Description\r\n\r\nFor MQTT deployments using usercodes/passwords: MQTT passwords are incorrectly classified as a non-authenticating identity statement (JWT) and exposed via monitoring endpoints.\r\n\r\n### Affected Versions\r\n\r\nAny version before v2.12.6 or v2.11.15\r\n\r\n### Workarounds\r\n\r\nEnsure your monitoring end-points are adequately secured.\r\n\r\nBest practice remains to not expose the monitoring endpoint to the Internet or other untrusted network users.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-05.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-v722-jcv5-w7mc>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33216>",
+   "severity": "high",
+   "published": "2026-03-24T20:42:36Z",
+   "cwes": [
+    "CWE-256"
+   ],
+   "ranges": [
+    "<= 2.12.5, <= 2.11.14"
+   ],
+   "fix_commits": [
+    "b5b63cfc35a57075e09c1f57503d31721bed8099"
+   ],
+   "fix_files": [
+    "server/auth.go",
+    "server/mqtt.go"
+   ]
+  },
+  {
+   "ghsa": "GHSA-fcjp-h8cc-6879",
+   "cve": "CVE-2026-33215",
+   "summary": "MQTT hijacking via Client ID",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nThe nats-server provides an MQTT client interface.\r\n\r\n### Problem Description\r\n\r\nSessions and Messages can by hijacked via MQTT Client ID malfeasance.\r\n\r\n### Affected Versions\r\n\r\nAny version before v2.12.6 or v2.11.15\r\n\r\n### Workarounds\r\n\r\nNone.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-06.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-fcjp-h8cc-6879>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33215>",
+   "severity": "medium",
+   "published": "2026-03-24T20:41:16Z",
+   "cwes": [
+    "CWE-287"
+   ],
+   "ranges": [
+    "<= 2.12.5, <= 2.11.14"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-52jh-2xxh-pwh6",
+   "cve": "CVE-2026-29785",
+   "summary": "leafnode pre-auth server panic DoS",
+   "description": "### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nWhen configured to accept leafnode connections (for a hub/spoke topology of multiple nats-servers), then the default configuration allows for negotiating compression; a malicious remote NATS server can trigger a server panic via that compression.\r\n\r\n### Problem Description\r\n\r\nIf the nats-server has the \"leafnode\" configuration enabled (not default), then anyone who can connect can crash the nats-server by triggering a panic. This happens pre-authentication and requires that compression be enabled (which it is, by default, when leafnodes are used).\r\n\r\nContext: a NATS server can form various clustering topologies, including local clusters, and superclusters of clusters, but leafnodes allow for separate administrative domains to link together with limited data communication; eg, a server in a moving vehicle might use a local leafnode for agents to connect to, and sync up to a central service as and when available. The leafnode configuration here is where the central server allows other NATS servers to connect into it, almost like regular NATS clients. Documentation examples typically use port 7422 for leafnode communications.\r\n\r\n### Affected Versions\r\n\r\nVersion 2, prior to v2.11.14 or v2.12.5\r\n\r\n### Workarounds\r\n\r\nDisable compression on the leafnode port:\r\n\r\n```\r\nleafnodes {\r\n  port: 7422\r\n  compression: off\r\n}\r\n```\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-04.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-52jh-2xxh-pwh6>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-29785>\r\n",
+   "severity": "high",
+   "published": "2026-03-24T20:48:45Z",
+   "cwes": [
+    "CWE-476"
+   ],
+   "ranges": [
+    "< 2.12.5"
+   ],
+   "fix_commits": [
+    "a1488de6f2ba6e666aef0f9cce0016f7f167d6a8"
+   ],
+   "fix_files": [
+    "server/leafnode.go",
+    "server/leafnode_test.go"
+   ]
+  },
+  {
+   "ghsa": "GHSA-pq2q-rcw4-3hr6",
+   "cve": "CVE-2026-27889",
+   "summary": "Pre-auth remote server crash via WebSocket frame length overflow in wsRead",
+   "description": "( We retain the original external report below the cut, with exploit details.\r\nThis issue was also independently reported by GitHub user @jiayuqi7813 before publication; they provided a Python exploit. )\r\n\r\n### Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nWhen using WebSockets, a malicious client can trigger a server crash with crafted frames, before authentication.\r\n\r\n\r\n### Problem Description\r\n\r\nA missing sanity check on a WebSockets frame could trigger a server panic in the nats-server.  This happens before authentication, and so is exposed to anyone who can connect to the websockets port.\r\n\r\n### Affected versions\r\n\r\nVersion 2 from v2.2.0 onwards, prior to v2.11.14 or v2.12.5\r\n\r\n### Workarounds\r\n\r\nThis only affects deployments which use WebSockets and which expose the network port to untrusted end-points.  If able to do so, a defense in depth of restricting either of these will mitigate the attack.\r\n\r\n### Solution\r\n\r\nUpgrade the NATS server to a fixed version.\r\n\r\n### Credits\r\n\r\nThis was reported to the NATS maintainers by GitHub user Mistz1.\r\nAlso independently reported by GitHub user jiayuqi7813.\r\n\r\n### References\r\n\r\n * This document is canonically: <https://advisories.nats.io/CVE/secnote-2026-03.txt>\r\n * GHSA advisory: <https://github.com/nats-io/nats-server/security/advisories/GHSA-pq2q-rcw4-3hr6>\r\n * MITRE CVE entry: <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-27889>\r\n\r\n-----\r\n\r\n## Report by @Mistz1 \r\n\r\n### Summary\r\n\r\nAn unauthenticated remote attacker can crash the entire nats-server process by sending a single malicious WebSocket frame (15 bytes after the HTTP upgrade handshake). The server fails to validate the RFC 6455 §5.2 requirement that the most significant bit of a 64-bit extended payload length must be zero. The resulting `uint64` → `int` conversion produces a negative value, which bypasses the bounds clamp and triggers an unrecovered `panic` in the connection's goroutine — killing the entire server process and disconnecting all clients. This affects all platforms (64-bit and 32-bit).\r\n\r\n### Details\r\n\r\n**Vulnerable code:** [`server/websocket.go` line 278](https://github.com/nats-io/nats-server/blob/a69f51f/server/websocket.go#L278)\r\n\r\n```go\r\nr.rem = int(binary.BigEndian.Uint64(tmpBuf))\r\n```\r\n\r\nWhen a WebSocket frame uses the 64-bit extended payload length (length code 127), the server reads 8 bytes and casts the raw `uint64` directly to `int` with no validation. RFC 6455 §5.2 states: *\"the most significant bit MUST be 0\"* — but nats-server never checks this.\r\n\r\n**Attack chain:**\r\n\r\n1. The attacker sends a WebSocket frame with the MSB set in the 64-bit length field (e.g., `0x8000000000000001`).\r\n\r\n2. At line 278, `int(0x8000000000000001)` produces `-9223372036854775807` on 64-bit Go (two's complement reinterpretation — Go does not panic on integer conversion overflow).\r\n\r\n3. `r.rem` is now negative. At line 307–311, the bounds clamp fails:\r\n\r\n   ```go\r\n   n = r.rem                    // n = -9223372036854775807\r\n   if pos+n > max {             // 14 + (-huge) = negative, NOT > max → FALSE\r\n       n = max - pos            // clamp NEVER fires\r\n   }\r\n   b = buf[pos : pos+n]         // buf[14 : -9223372036854775793] → PANIC\r\n   ```\r\n\r\n   The addition `pos + n` wraps to a negative value (Go signed integer overflow is defined behavior — it wraps silently). Since the negative result is never greater than `max`, the clamp is skipped. The slice expression at line 311 reaches the Go runtime bounds check, which panics.\r\n\r\n4. There is **no `defer recover()`** anywhere in the goroutine chain:\r\n   - [`startGoRoutine`](https://github.com/nats-io/nats-server/blob/a69f51f/server/server.go#L4076-L4079): `go func() { f() }()` — no recovery\r\n   - [`readLoop`](https://github.com/nats-io/nats-server/blob/a69f51f/server/client.go#L1387-L1394): defer only does cleanup — no recovery\r\n\r\n   The unrecovered p",
+   "severity": "high",
+   "published": "2026-03-24T21:10:57Z",
+   "cwes": [
+    "CWE-190"
+   ],
+   "ranges": [
+    ">= 2.2.0, <= v2.11.12, <= v2.12.4"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-qrvq-68c2-7grw",
+   "cve": "CVE-2026-27571",
+   "summary": "nats-server WebSockets pre-auth memory DoS",
+   "description": "### Impact\r\n\r\nThe WebSockets handling of NATS messages handles compressed messages via the WebSockets negotiated compression.  The implementation bound the memory size of a NATS message but did not independently bound the memory consumption of the memory stream when constructing a NATS message which might then fail validation for size reasons.\r\n\r\nAn attacker can use a compression bomb to cause excessive memory consumption, often resulting in the operating system terminating the server process.\r\n\r\nThe use of compression is negotiated before authentication, so this does not require valid NATS credentials to exploit.\r\n\r\nThe fix was to bounds the decompression to fail once the message was too large, instead of continuing on.\r\n\r\n### Patches\r\n\r\nThis was released in nats-server without being highlighted as a security issue.  It should have been, this was an oversight.  Per the NATS security policy, because this does not require a valid user, it is CVE-worthy.\r\n\r\nThis was fixed in the v2.11 series with v2.11.12 and in the v2.12 series with v2.12.3.\r\n\r\n### Workarounds\r\n\r\nThis only affects deployments which use WebSockets and which expose the network port to untrusted end-points.\r\n\r\n### References\r\n\r\nThis was reported to the NATS maintainers by Pavel Kohout of Aisle Research (www.aisle.com).",
+   "severity": "medium",
+   "published": "2026-02-23T23:04:09Z",
+   "cwes": [
+    "CWE-409",
+    "CWE-770"
+   ],
+   "ranges": [
+    "< 2.11.12, < 2.12.3"
+   ],
+   "fix_commits": [
+    "f77fb7c4535e6727cc1a2899cd8e6bbdd8ba2017"
+   ],
+   "fix_files": [
+    "server/websocket.go",
+    "server/websocket_test.go"
+   ]
+  },
+  {
+   "ghsa": "GHSA-fhg8-qxh5-7q3w",
+   "cve": "CVE-2025-30215",
+   "summary": "Failure to authorize certain Jetstream admin APIs",
+   "description": "## Advisory\r\n\r\n * [NATS-advisory-ID: 2025-01](https://advisories.nats.io/CVE/secnote-2025-01.txt)\r\n * [Go Vulnerability DB GO-2025-3600](https://osv.dev/vulnerability/GO-2025-3600)\r\n\r\nThe management of JetStream assets happens with messages in the `$JS.` subject namespace in the system account; this is partially exposed into regular accounts to allow account holders to manage their assets.\r\n\r\nSome of the JS API requests were missing access controls, allowing any user with JS management permissions in any account to perform certain administrative actions on any JS asset in any other account. At least one of the unprotected APIs allows for data destruction. None of the affected APIs allow disclosing stream contents.\r\n\r\n### Affected versions\r\n\r\nNATS Server:\r\n * Version 2 from v2.2.0 onwards, prior to v2.11.1 or v2.10.27\r\n\r\n-----\r\n\r\n## Original Report\r\n\r\n(Lightly edited to confirm some supposition and in the summary to use past tense)\r\n\r\n### Summary\r\n\r\nnats-server did not include authorization checks on 4 separate admin-level JetStream APIs: account purge, server remove,  account stream move, and  account stream cancel-move.\r\n\r\nIn all cases, APIs are not properly restricted to system-account users. Instead, _any_ authorized user can execute the APIs, including across account boundaries, as long as the current user merely has permission to publish on `$JS.>`.\r\n\r\nOnly the first seems to be of highest severity. All are included in this single report as they seem likely to have the same underlying root cause.\r\n\r\nReproduction of the `ACCOUNT.PURGE` case is below. The others are like it.\r\n\r\n\r\n### Details & Impact\r\n\r\n#### Issue 1: `$JS.API.ACCOUNT.PURGE.*`\r\n\r\nAny user may perform an account purge of any other account (including their own).\r\n\r\nRisk: total destruction of Jetstream configuration and data.\r\n\r\n\r\n#### Issue 2: `$JS.API.SERVER.REMOVE`\r\n\r\nAny user may remove servers from Jetstream clusters.\r\n\r\nRisk: Loss of data redundancy, reduction of service quality.\r\n\r\n\r\n#### Issue 3: `$JS.API.ACCOUNT.STREAM.MOVE.*.*` and `CANCEL_MOVE`\r\n\r\nAny user may cause streams to be moved between servers.\r\n\r\nRisk: loss of control of data provenance, reduced service quality during move, enumeration of account and/or stream names.\r\n\r\nSimilarly for `$JS.API.ACCOUNT.STREAM.CANCEL_MOVE.*.*`\r\n\r\n\r\n#### Mitigations\r\n\r\nIt appears that users without permission to publish on `$JS.API.ACCOUNT.>` or `$JS.API.SERVER.>` are unable to execute the above APIs.\r\n\r\nUnfortunately, in many configurations, an 'admin' user for a single account will be given permissions for `$JS.>` (or simply `>`), which allows the improper access to the system APIs above.\r\n\r\n\r\n#### Scope of impact\r\n\r\nIssues 1 and 3 both cross boundaries between accounts, violating promised account isolation. All 3 allow system level access to non-system account users.\r\n\r\nWhile I cannot speak to what authz configurations are actually found in the wild, per the discussion in Mitigations above, it seems likely that at least some configurations are vulnerable.\r\n\r\n\r\n#### Additional notes\r\n\r\nIt appears that `$JS.API.META.LEADER.STEPDOWN` does properly restrict to system account users. As such, this may be a pattern for how to properly authorize these other APIs.\r\n\r\n\r\n\r\n### PoC\r\n\r\n#### Environment\r\n\r\nTested with:\r\nnats-server 2.10.26 (installed via homebrew)\r\nnats cli 0.1.6 (installed via homebrew)\r\nmacOS 13.7.4\r\n\r\n\r\n#### Reproduction steps\r\n\r\n```\r\n$ nats-server --version\r\nnats-server: v2.10.26\r\n\r\n$ nats --version\r\n0.1.6\r\n\r\n$ cat nats-server.conf\r\nlisten: '0.0.0.0:4233'\r\njetstream: {\r\n  store_dir: './tmp'\r\n}\r\naccounts: {\r\n  '$SYS': {\r\n    users: [{user: 'sys', password: 'sys'}]\r\n  },\r\n  'TEST': {\r\n    jetstream: true,\r\n    users: [{user: 'a', password: 'a'}]\r\n  },\r\n  'TEST2': {\r\n    jetstream: true,\r\n    users: [{user: 'b', password: 'b'}]\r\n  }\r\n}\r\n\r\n$ nats-server -c ./nats-server.conf\r\n...\r\n[90608] 2025/03/02 11:43:18.494663 [INF] Using configuration file: ./nats-server.conf\r\n...\r\n[90608] 2025/03/02 11:43:18.496395 ",
+   "severity": "critical",
+   "published": "2025-04-15T19:49:11Z",
+   "cwes": [
+    "CWE-285",
+    "CWE-287"
+   ],
+   "ranges": [
+    "<= 2.11.0",
+    "<= 2.11.0"
+   ],
+   "fix_commits": [
+    "3e7e4645a24e829a36b4210f2d7c34dea7f7a424"
+   ],
+   "fix_files": [
+    "server/jetstream_api.go"
+   ]
+  },
+  {
+   "ghsa": "GHSA-fr2g-9hjm-wr23",
+   "cve": "CVE-2023-47090",
+   "summary": "Adding accounts for just the system account adds auth bypass",
+   "description": "(This advisory is canonically <https://advisories.nats.io/CVE/secnote-2023-01.txt>)\r\n\r\n## Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nNATS users exist within accounts, and once using accounts, the old authorization block is not applicable.\r\n\r\n\r\n## Problem Description\r\n\r\nWithout any authorization rules in the nats-server, users can connect without authentication.\r\n\r\nBefore nats-server 2.2.0, all authentication and authorization rules for a nats-server lived in an \"authorization\" block, defining users.  With nats-server 2.2.0 all users live inside accounts.  When using the authorization block, whose syntax predates this, those users will be placed into the implicit global account, \"$G\".  Users inside accounts go into the newer \"accounts\" block.\r\n\r\nIf an \"accounts\" block is defined, in simple deployment scenarios this is often used only to enable client access to the system account.  When the only account added is the system account \"$SYS\", the nats-server would create an implicit user in \"$G\" and set it as the `no_auth_user` account, enabling the same \"without authentication\" logic as without any rules.\r\n\r\nThis preserved the ability to connect simply, and then add one authenticated login for system access.\r\n\r\nBut with an \"authorization\" block, this is wrong.  Users exist in the global account, with login rules.  And in simple testing, they might still connect fine without administrators seeing that authentication has been disabled.\r\n\r\nThe blind-spot on our part came from encouraging and documenting a switch to using only \"accounts\", instead of \"authorization\".\r\n\r\nIn the fixed versions, using an \"authorization\" block will inhibit the implicit creation of a \"$G\" user and setting it as the `no_auth_user` target.  In unfixed versions, just creating a second account, with no users, will also inhibit this behavior.\r\n\r\n\r\n## Affected versions\r\n\r\nNATS Server:\r\n * 2.2.0 up to and including 2.9.22 and 2.10.1\r\n * Fixed with nats-io/nats-server: 2.10.2 and backported to 2.9.23\r\n\r\n\r\n## Workarounds\r\n\r\nIn the \"accounts\" block, define a second non-system account, leave it empty.\r\n\r\n    accounts {\r\n        SYS: {\r\n            users: [\r\n                { user: sysuser, password: makemeasandwich }\r\n            ]\r\n        }\r\n        DUMMY: {}  # for security, before 2.10.2\r\n    }\r\n    system_account: SYS\r\n\r\n\r\n## Solution\r\n\r\nAny one of these:\r\n\r\n 1. Upgrade the NATS server to at least 2.10.2 (or 2.9.23)\r\n 2. Or define a dummy account\r\n 3. Or complete the migration of authorization entries to be inside a named account in the \"accounts\" block\r\n\r\n\r\n## Credits\r\n\r\nProblem reported by Alex Herrington.  \r\nAddressed publicly in a GitHub Discussion prior to this advisory.\r\n",
+   "severity": "high",
+   "published": "2023-10-18T23:50:44Z",
+   "cwes": [
+    "CWE-305"
+   ],
+   "ranges": [
+    "2.2.0 <= V <= 2.10.1"
+   ],
+   "fix_commits": [
+    "fa5b7afcb64e7e887e49afdd032358802b5c4478"
+   ],
+   "fix_files": [
+    "server/opts.go",
+    "server/opts_test.go",
+    "server/routes_test.go",
+    "server/server.go",
+    "server/server_test.go"
+   ]
+  },
+  {
+   "ghsa": "GHSA-6h3m-36w8-hv68",
+   "cve": "CVE-2022-26652",
+   "summary": "Arbitrary file write by JetStream-enabled users",
+   "description": "(This document is canonically: <https://advisories.nats.io/CVE/CVE-2022-26652.txt>)\r\n\r\n## Background\r\n\r\nNATS.io is a high performance open source pub-sub distributed communication technology, built for the cloud, on-premise, IoT, and edge computing.\r\n\r\nJetStream is the optional RAFT-based resilient persistent feature of NATS.\r\n\r\n\r\n## Problem Description\r\n\r\nThe JetStream streams can be backed up and restored via NATS. The backup format is a tar archive file.  Inadequate checks on the filenames within the archive file permit a so-called \"Zip Slip\" attack in the stream restore.\r\n\r\nNATS nats-server through 2022-03-09 (fixed in release 2.7.4) did not correctly sanitize elements of the archive file, thus a user of NATS\r\ncould cause the NATS server to write arbitrary content to an attacker-controlled filename.\r\n\r\n\r\n## Affected versions\r\n\r\nNATS Server:\r\n * 2.2.0 up to and including 2.7.3.\r\n   + Introduced with JetStream Restore functionality\r\n * Fixed with nats-io/nats-server: 2.7.4\r\n * Docker image:  nats <https://hub.docker.com/_/nats>\r\n * NB users of OS package files from our releases: a change in goreleaser defaults, discovered late in the release process, moved the install directory from /usr/local/bin to /usr/bin; we are evaluating the correct solution for subsequent releases, but not recutting this release.\r\n\r\nNATS Streaming Server\r\n * 0.15.0 up to and including 0.24.2\r\n * Fixed with nats-io/nats-streaming-server: 0.24.3\r\n * Embeds a nats-server, but this server is the old approach which JetStream replaces, so unlikely (but not impossible) to be\r\n   configured with JS support\r\n\r\n\r\n## Workarounds\r\n\r\n * Disable JetStream for untrusted users.\r\n * If only one NATS account uses JetStream, such that cross-user attacks are not an issue, and any user in that account with access to the JetStream API is fully trusted anyway, then appropriate sandboxing techniques will prevent exploit.\r\n   + Eg, with systemd, the supplied util/nats-server-hardened.service example configuration demonstrates that NATS runs fine as an unprivileged user under ProtectSystem=strict and PrivateTmp=true restrictions; by only opening a ReadWritePaths hole for the JetStream storage area, the impact of this vulnerability is limited.\r\n\r\n\r\n## Solution\r\n\r\nUpgrade the NATS server to at least 2.7.4.\r\n\r\nWe fully support the util/nats-server-hardened.service configuration for running a NATS server and encourage this approach.\r\n\r\n\r\n## Credits\r\n\r\nThis issue was reported (on 2022-03-07) to the NATS Maintainers by\r\nYiming Xiang, TIANJI LAB of NSFOCUS.  \r\nThank you / 谢谢你！\r\n",
+   "severity": "high",
+   "published": "2022-03-10T00:39:37Z",
+   "cwes": [
+    "CWE-22",
+    "CWE-26"
+   ],
+   "ranges": [
+    "2.2.0 <= version <= 2.7.3",
+    "0.15.0 <= version <= 0.24.2"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-g6w6-r76c-28j7",
+   "cve": "CVE-2022-24450",
+   "summary": "Unconstrained account assumption by authenticated clients",
+   "description": "(This advisory is canonically <https://advisories.nats.io/CVE/CVE-2022-24450.txt>)\r\n\r\n## Problem Description\r\n\r\nNATS nats-server through 2022-02-04 has Incorrect Access Control, with unchecked ability for clients to authorize into any account, because of a coding error in a long-extant experimental feature.\r\n\r\nA client crafting the initial protocol-level handshake could, with valid credentials for any account, specify a target account and switch into it immediately.  This includes any other tenant, and includes the System account which controls nats-server core operations.\r\n\r\nFor deployments not using multi-tenancy through NATS Accounts, there is still a vulnerability: normal users are able to choose to be in the System account.\r\n\r\nAn experimental feature to provide dynamically provisioned sandbox accounts was designed to allow a server administrator to turn on an option to allow clients to dynamically request a brand new account inline at connection time.  This feature went nowhere, but lived on in the code and was used by a number of tests; support was never added to any client libraries or to the documentation.\r\n\r\nA bug in handling the feature meant that if someone did in fact have valid account credentials, then they could specify any other existing account and they would be assigned into that account.\r\n\r\nRelease 2.7.2 of nats-server removes the feature.\r\nBecause of the lack of client support and absence from protocol documentation, we feel this is safe operationally as well as the safest fix for the code.\r\n\r\n\r\n## Affected versions\r\n\r\n#### NATS Server\r\n * All 2.x versions up to and including 2.7.1.\r\n * Fixed with nats-io/nats-server: 2.7.2\r\n * NATS Server 1.x did not have accounts.\r\n * Docker image:  nats <https://hub.docker.com/_/nats>\r\n\r\n#### NATS Streaming Server\r\n * All versions embedding affected NATS Server:\r\n   + Affected: v0.15.0 up to and including v0.24.0\r\n   + Fixed with nats-io/nats-streaming-server: 0.24.1\r\n * Docker image:  nats-streaming <https://hub.docker.com/_/nats-streaming>\r\n\r\n\r\n## Impact\r\n\r\nExisting users could act in any account, including the System account.\r\n\r\n## Workaround\r\n\r\nNone.\r\n\r\n## Solution\r\n\r\nUpgrade the NATS server.",
+   "severity": "critical",
+   "published": "2022-02-07T19:58:31Z",
+   "cwes": [
+    "CWE-863"
+   ],
+   "ranges": [
+    "2.0.0 <= V <= 2.7.1",
+    "0.15.0 <= V <= 0.24.0"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-jj54-5q2m-q7pj",
+   "cve": "CVE-2021-32026",
+   "summary": "TLS missing ciphersuite settings when CLI flags used",
+   "description": "(This advisory is canonically <https://advisories.nats.io/CVE/CVE-2021-32026.txt>)\r\n\r\n### Problem Description\r\n\r\nThe NATS server by default uses a restricted set of modern ciphersuites for TLS.  This selection can be overridden through configuration. The defaults include just RSA and ECDSA with either AES/GCM with a SHA2 digest or ChaCha20/Poly1305.\r\n\r\nThe configuration system allows for extensive use of CLI options to override configuration settings.  When using these to set a key/cert for TLS, the restricted ciphersuite settings were lost, enabling all ciphersuites supported by Go by default.\r\n\r\nNone of these additional ciphersuites are broken, so the NATS maintainers have fixed this in public git and the next release is not being hurried, nor is this security advisory embargoed.\r\n\r\n\r\n### Affected versions\r\n\r\nNATS Server:\r\n * All versions prior to 2.2.3\r\n * fixed with nats-io/nats-server commit ffccc2e1bd (2021-04-29)\r\n\r\n\r\n### Impact\r\n\r\nIf a server administrator chooses to start the nats-server with TLS configuration parameters provided on the command-line, then clients can negotiate TLS ciphersuites which were not expected.\r\n\r\n\r\n### Workaround\r\n\r\nUse a configuration file to set the TLS parameters instead of command-line options.\r\n\r\n\r\n### Solution\r\n\r\nUpgrade the NATS server.\r\n\r\n\r\n### Credits\r\n\r\nThis issue was identified and reported by SimCorp.",
+   "severity": "low",
+   "published": "2021-05-04T05:39:55Z",
+   "cwes": [],
+   "ranges": [
+    "< 2.2.3"
+   ],
+   "fix_commits": [
+    "ffccc2e1bd7aa2466bd9e631e976bfd7ca46f225"
+   ],
+   "fix_files": [
+    "server/opts.go",
+    "server/opts_test.go"
+   ]
+  },
+  {
+   "ghsa": "GHSA-j756-f273-xhp4",
+   "cve": "CVE-2021-3127",
+   "summary": "Import token permissions checking not enforced",
+   "description": "(This advisory is canonically <https://advisories.nats.io/CVE/CVE-2021-3127.txt>)\r\n\r\n## Problem Description\r\n\r\nThe NATS server provides for Subjects which are namespaced by Account; all Subjects are supposed to be private to an account, with an Export/Import system used to grant cross-account access to some Subjects.  Some Exports are public, such that anyone can import the\r\nrelevant subjects, and some Exports are private, such that the Import requires a token JWT to prove permission.\r\n\r\nThe JWT library's validation of the bindings in the Import Token incorrectly warned on mismatches, instead of outright rejecting the token.\r\n\r\nAs a result, any account can take an Import token used by any other account and re-use it for themselves because the binding to the\r\nimporting account is not rejected, and use it to import *any* Subject from the Exporting account, not just the Subject referenced in the Import Token.\r\n\r\nThe NATS account-server system treats account JWTs as semi-public information, such that an attacker can easily enumerate all account JWTs and retrieve all Import Tokens from those account JWTs.\r\n\r\nThe CVE identifier should cover the JWT library repair and the nats-server containing the fixed JWT library, and any other application depending upon the fixed JWT library.\r\n\r\n\r\n## Affected versions\r\n\r\n#### JWT library\r\n\r\n * all versions prior to 2.0.1\r\n * fixed after nats-io/jwt#149 landed (2021-03-14)\r\n\r\n#### NATS Server\r\n\r\n * Version 2 prior to 2.2.0\r\n   + 2.0.0 through and including 2.1.9 are vulnerable\r\n * fixed with nats-io/nats-server@423b79440c (2021-03-14)\r\n\r\n\r\n## Impact\r\n\r\nIn deployments with untrusted accounts able to update the Account Server with imports, a malicious account can access any Subject from an account which provides Exported Subjects.\r\n\r\nAbuse of this facility requires the malicious actor to upload their tampered Account JWT to the Account Server, providing the service operator with a data-store which can be scanned for signs of abuse.\r\n\r\n\r\n## Workaround\r\n\r\nDeny access to clients to update their account JWT in the account server.\r\n\r\n\r\n## Solution\r\n\r\nUpgrade the JWT dependency in any application using it.\r\n\r\nUpgrade the NATS server if using NATS Accounts (with private Exports; Account owners can create those at any time though).\r\n\r\nAudit all accounts JWTs to scan for exploit attempts; a Python script to audit the accounts can be found at <https://gist.github.com/philpennock/09d49524ad98043ff11d8a40c2bb0d5a>.",
+   "severity": "critical",
+   "published": "2021-03-24T16:11:23Z",
+   "cwes": [
+    "CWE-755",
+    "CWE-862",
+    "CWE-863"
+   ],
+   "ranges": [
+    ">=2, < 2.2.0"
+   ],
+   "fix_commits": [
+    "423b79440c80c863de9f4e20548504e6c5d5e403"
+   ],
+   "fix_files": [
+    "go.mod",
+    "go.sum",
+    "server/accounts.go",
+    "server/jwt_test.go",
+    "vendor/github.com/klauspost/compress/s2/README.md",
+    "vendor/github.com/klauspost/compress/s2/cpuid_amd64.go",
+    "vendor/github.com/klauspost/compress/s2/cpuid_amd64.s",
+    "vendor/github.com/klauspost/compress/s2/decode.go",
+    "vendor/github.com/klauspost/compress/s2/decode_amd64.s",
+    "vendor/github.com/klauspost/compress/s2/decode_arm64.s",
+    "vendor/github.com/klauspost/compress/s2/decode_asm.go",
+    "vendor/github.com/klauspost/compress/s2/decode_other.go",
+    "vendor/github.com/klauspost/compress/s2/encode_amd64.go",
+    "vendor/github.com/klauspost/compress/s2/encode_better.go",
+    "vendor/github.com/klauspost/compress/s2/encode_go.go",
+    "vendor/github.com/klauspost/compress/s2/encodeblock_amd64.go",
+    "vendor/github.com/klauspost/compress/s2/encodeblock_amd64.s",
+    "vendor/github.com/minio/highwayhash/.golangci.yml",
+    "vendor/github.com/minio/highwayhash/.travis.yml",
+    "vendor/github.com/minio/highwayhash/LICENSE",
+    "vendor/github.com/minio/highwayhash/README.md",
+    "vendor/github.com/minio/highwayhash/go.mod",
+    "vendor/github.com/minio/highwayhash/highwayhashAVX2_amd64.go",
+    "vendor/github.com/minio/highwayhash/highwayhashAVX2_amd64.s",
+    "vendor/github.com/minio/highwayhash/highwayhash_amd64.go",
+    "vendor/github.com/minio/highwayhash/highwayhash_arm64.go",
+    "vendor/github.com/minio/highwayhash/highwayhash_arm64.s",
+    "vendor/github.com/minio/highwayhash/highwayhash_ppc64le.go",
+    "vendor/github.com/minio/highwayhash/highwayhash_ppc64le.s",
+    "vendor/github.com/minio/highwayhash/highwayhash_ref.go",
+    "vendor/github.com/nats-io/jwt/v2/go.mod",
+    "vendor/github.com/nats-io/jwt/v2/go.sum",
+    "vendor/github.com/nats-io/jwt/v2/header.go",
+    "vendor/github.com/nats-io/jwt/v2/imports.go",
+    "vendor/github.com/nats-io/jwt/v2/signingkeys.go",
+    "vendor/github.com/nats-io/nkeys/.travis.yml",
+    "vendor/github.com/nats-io/nkeys/MAINTAINERS.md",
+    "vendor/github.com/nats-io/nkeys/README.md",
+    "vendor/github.com/nats-io/nkeys/go.mod",
+    "vendor/github.com/nats-io/nkeys/go.sum",
+    "vendor/github.com/nats-io/nkeys/main.go",
+    "vendor/golang.org/x/crypto/ed25519/ed25519.go",
+    "vendor/golang.org/x/crypto/ed25519/ed25519_go113.go",
+    "vendor/golang.org/x/sys/cpu/asm_aix_ppc64.s",
+    "vendor/golang.org/x/sys/cpu/cpu_arm64.go",
+    "vendor/golang.org/x/sys/cpu/cpu_arm64.s",
+    "vendor/golang.org/x/sys/cpu/cpu_gc_arm64.go",
+    "vendor/golang.org/x/sys/cpu/cpu_gc_s390x.go",
+    "vendor/golang.org/x/sys/cpu/cpu_gc_x86.go",
+    "vendor/golang.org/x/sys/cpu/cpu_linux_s390x.go",
+    "vendor/golang.org/x/sys/cpu/cpu_netbsd_arm64.go",
+    "vendor/golang.org/x/sys/cpu/cpu_other_arm64.go",
+    "vendor/golang.org/x/sys/cpu/cpu_other_mips64x.go",
+    "vendor/golang.org/x/sys/cpu/cpu_s390x.go",
+    "vendor/golang.org/x/sys/cpu/cpu_s390x.s",
+    "vendor/golang.org/x/sys/cpu/cpu_x86.s",
+    "vendor/golang.org/x/sys/cpu/cpu_zos.go",
+    "vendor/golang.org/x/sys/cpu/cpu_zos_s390x.go",
+    "vendor/golang.org/x/sys/cpu/syscall_aix_ppc64_gc.go",
+    "vendor/golang.org/x/sys/unix/asm_aix_ppc64.s",
+    "vendor/golang.org/x/sys/unix/asm_darwin_386.s",
+    "vendor/golang.org/x/sys/unix/asm_darwin_amd64.s",
+    "vendor/golang.org/x/sys/unix/asm_darwin_arm.s",
+    "vendor/golang.org/x/sys/unix/asm_darwin_arm64.s",
+    "vendor/golang.org/x/sys/unix/asm_dragonfly_amd64.s",
+    "vendor/golang.org/x/sys/unix/asm_freebsd_386.s",
+    "vendor/golang.org/x/sys/unix/asm_freebsd_amd64.s",
+    "vendor/golang.org/x/sys/unix/asm_freebsd_arm.s",
+    "vendor/golang.org/x/sys/unix/asm_freebsd_arm64.s",
+    "vendor/golang.org/x/sys/unix/asm_linux_386.s",
+    "vendor/golang.org/x/sys/unix/asm_linux_amd64.s",
+    "vendor/golang.org/x/sys/unix/asm_linux_arm.s",
+    "vendor/golang.org/x/sys/unix/asm_linux_arm64.s",
+    "vendor/golang.org/x/sys/unix/asm_linux_mips64x.s",
+    "vendor/golang.org/x/sys/unix/asm_linux_mipsx.s",
+    "vendor/golang.org/x/sys/unix/asm_linux_ppc64x.s",
+    "vendor/golang.org/x/sys/unix/asm_linux_riscv64.s",
+    "vendor/golang.org/x/sys/unix/asm_linux_s390x.s",
+    "vendor/golang.org/x/sys/unix/asm_netbsd_386.s",
+    "vendor/golang.org/x/sys/unix/asm_netbsd_amd64.s",
+    "vendor/golang.org/x/sys/unix/asm_netbsd_arm.s",
+    "vendor/golang.org/x/sys/unix/asm_netbsd_arm64.s",
+    "vendor/golang.org/x/sys/unix/asm_openbsd_386.s",
+    "vendor/golang.org/x/sys/unix/asm_openbsd_amd64.s",
+    "vendor/golang.org/x/sys/unix/asm_openbsd_arm.s",
+    "vendor/golang.org/x/sys/unix/asm_openbsd_arm64.s",
+    "vendor/golang.org/x/sys/unix/asm_openbsd_mips64.s",
+    "vendor/golang.org/x/sys/unix/asm_solaris_amd64.s",
+    "vendor/golang.org/x/sys/unix/endian_big.go",
+    "vendor/golang.org/x/sys/unix/endian_little.go",
+    "vendor/golang.org/x/sys/unix/fcntl_linux_32bit.go",
+    "vendor/golang.org/x/sys/unix/mkerrors.sh",
+    "vendor/golang.org/x/sys/unix/syscall.go",
+    "vendor/golang.org/x/sys/unix/syscall_aix.go",
+    "vendor/golang.org/x/sys/unix/syscall_bsd.go",
+    "vendor/golang.org/x/sys/unix/syscall_darwin.go",
+    "vendor/golang.org/x/sys/unix/syscall_darwin_386.go",
+    "vendor/golang.org/x/sys/unix/syscall_darwin_amd64.go",
+    "vendor/golang.org/x/sys/unix/syscall_darwin_arm.go",
+    "vendor/golang.org/x/sys/unix/syscall_darwin_arm64.go",
+    "vendor/golang.org/x/sys/unix/syscall_dragonfly.go",
+    "vendor/golang.org/x/sys/unix/syscall_freebsd.go",
+    "vendor/golang.org/x/sys/unix/syscall_linux.go",
+    "vendor/golang.org/x/sys/unix/syscall_linux_386.go",
+    "vendor/golang.org/x/sys/unix/syscall_linux_amd64_gc.go",
+    "vendor/golang.org/x/sys/unix/syscall_linux_gc.go",
+    "vendor/golang.org/x/sys/unix/syscall_linux_gc_386.go",
+    "vendor/golang.org/x/sys/unix/syscall_linux_gc_arm.go",
+    "vendor/golang.org/x/sys/unix/syscall_netbsd.go",
+    "vendor/golang.org/x/sys/unix/syscall_openbsd.go",
+    "vendor/golang.org/x/sys/unix/syscall_solaris.go",
+    "vendor/golang.org/x/sys/unix/syscall_unix_gc.go",
+    "vendor/golang.org/x/sys/unix/syscall_unix_gc_ppc64x.go",
+    "vendor/golang.org/x/sys/unix/zerrors_darwin_386.go",
+    "vendor/golang.org/x/sys/unix/zerrors_darwin_amd64.go",
+    "vendor/golang.org/x/sys/unix/zerrors_darwin_arm.go",
+    "vendor/golang.org/x/sys/unix/zerrors_darwin_arm64.go",
+    "vendor/golang.org/x/sys/unix/zerrors_dragonfly_amd64.go",
+    "vendor/golang.org/x/sys/unix/zerrors_linux.go",
+    "vendor/golang.org/x/sys/unix/zerrors_solaris_amd64.go",
+    "vendor/golang.org/x/sys/unix/zsyscall_aix_ppc64_gc.go",
+    "vendor/golang.org/x/sys/unix/zsyscall_darwin_386.go",
+    "vendor/golang.org/x/sys/unix/zsyscall_darwin_386.s",
+    "vendor/golang.org/x/sys/unix/zsyscall_darwin_amd64.go",
+    "vendor/golang.org/x/sys/unix/zsyscall_darwin_amd64.s",
+    "vendor/golang.org/x/sys/unix/zsyscall_darwin_arm64.go",
+    "vendor/golang.org/x/sys/unix/zsyscall_darwin_arm64.s",
+    "vendor/golang.org/x/sys/unix/zsyscall_dragonfly_amd64.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_darwin_386.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_darwin_amd64.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_darwin_arm.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_darwin_arm64.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_dragonfly_amd64.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_386.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_amd64.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_arm.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_arm64.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_mips.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_mips64.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_mips64le.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_mipsle.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_ppc64.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_ppc64le.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_riscv64.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_s390x.go",
+    "vendor/golang.org/x/sys/unix/zsysnum_linux_sparc64.go",
+    "vendor/golang.org/x/sys/unix/ztypes_darwin_386.go",
+    "vendor/golang.org/x/sys/unix/ztypes_darwin_amd64.go",
+    "vendor/golang.org/x/sys/unix/ztypes_darwin_arm.go",
+    "vendor/golang.org/x/sys/unix/ztypes_darwin_arm64.go",
+    "vendor/golang.org/x/sys/unix/ztypes_dragonfly_amd64.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_386.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_amd64.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_arm.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_arm64.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_mips.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_mips64.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_mips64le.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_mipsle.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_ppc64.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_ppc64le.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_riscv64.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_s390x.go",
+    "vendor/golang.org/x/sys/unix/ztypes_linux_sparc64.go",
+    "vendor/golang.org/x/sys/unix/ztypes_solaris_amd64.go",
+    "vendor/golang.org/x/sys/windows/dll_windows.go",
+    "vendor/golang.org/x/sys/windows/memory_windows.go",
+    "vendor/golang.org/x/sys/windows/registry/zsyscall_windows.go",
+    "vendor/golang.org/x/sys/windows/security_windows.go",
+    "vendor/golang.org/x/sys/windows/setupapierrors_windows.go",
+    "vendor/golang.org/x/sys/windows/svc/mgr/config.go",
+    "vendor/golang.org/x/sys/windows/svc/security.go",
+    "vendor/golang.org/x/sys/windows/syscall.go",
+    "vendor/golang.org/x/sys/windows/syscall_windows.go",
+    "vendor/golang.org/x/sys/windows/types_windows.go",
+    "vendor/golang.org/x/sys/windows/zsyscall_windows.go",
+    "vendor/modules.txt"
+   ]
+  },
+  {
+   "ghsa": "GHSA-gwj5-3vfq-q992",
+   "cve": "CVE-2020-28466",
+   "summary": "Import loops in account imports, nats-server DoS",
+   "description": "(This advisory is canonically <https://advisories.nats.io/CVE/CVE-2020-28466.txt>)\r\n\r\n## Problem Description\r\n\r\nAn export/import cycle between accounts could crash the nats-server, after consuming CPU and memory.\r\n\r\nThis issue was fixed publicly in <https://github.com/nats-io/nats-server/pull/1731> in November 2020.\r\n\r\nThe need to call this out as a security issue was highlighted by `snyk.io` and we are grateful for their assistance in doing so.\r\n\r\nOrganizations which run a NATS service providing access to accounts run by untrusted third parties are affected.\r\nSee below for an important caveat if running such a service.\r\n\r\n\r\n## Affected versions\r\n\r\n#### NATS Server\r\n\r\n * Version 2 prior to 2.2.0\r\n   + 2.0.0 through and including 2.1.9 are vulnerable.\r\n * fixed with nats-io/nats-server PR 1731, commit 2e3c226729\r\n\r\n\r\n## Impact\r\n\r\nThe nats-server could be killed, after consuming resources.\r\n\r\n\r\n## Workaround\r\n\r\nThe import cycle requires at least two accounts to work; if you have open account sign-up, then restricting new account sign-up might hinder an attacker.\r\n\r\n\r\n## Solution\r\n\r\nUpgrade the nats-server.\r\n\r\n\r\n## Caveat on NATS with untrusted users\r\n\r\nRunning a NATS service which is exposed to untrusted users presents a heightened risk.\r\n\r\nAny remote execution flaw or equivalent seriousness, or denial-of-service by unauthenticated users, will lead to prompt releases by the NATS maintainers.\r\n\r\nFixes for denial of service issues with no threat of remote execution, when limited to account holders, are likely to just be committed to the main development branch with no special attention.\r\n\r\nThose who are running such services are encouraged to build regularly from git.",
+   "severity": "low",
+   "published": "2021-03-24T15:57:55Z",
+   "cwes": [
+    "CWE-400",
+    "CWE-835"
+   ],
+   "ranges": [
+    ">=2, < 2.2.0"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-hmm9-r2m2-qg9w",
+   "cve": "CVE-2020-26521",
+   "summary": "Nil dereference in NATS JWT, DoS of nats-server",
+   "description": "(This advisory is canonically <https://advisories.nats.io/CVE/CVE-2020-26521.txt>)\r\n\r\n## Problem Description\r\n\r\nThe NATS account system has an Operator trusted by the servers, which signs Accounts, and each Account can then create and sign Users within their account.  The Operator should be able to safely issue Accounts to other entities which it does not fully trust.\r\n\r\nA malicious Account could create and sign a User JWT with a state not created by the normal tooling, such that decoding by the NATS JWT library (written in Go) would attempt a nil dereference, aborting execution.\r\n\r\nThe NATS Server is known to be impacted by this.\r\n\r\n\r\n## Affected versions\r\n\r\n#### JWT library\r\n\r\n * all versions prior to 1.1.0\r\n\r\n#### NATS Server\r\n\r\n * Version 2 prior to 2.1.9\r\n\r\n\r\n## Impact\r\n\r\n#### JWT library\r\n\r\n * Programs would nil dereference and panic, aborting execution by default.\r\n\r\n#### NATS server\r\n\r\n * Denial of Service caused by process termination\r\n\r\n\r\n## Workaround\r\n\r\nIf your NATS servers do not trust any accounts which are managed by untrusted entities, then malformed User credentials are unlikely to be encountered.\r\n\r\n\r\n## Solution\r\n\r\nUpgrade the JWT dependency in any application using it.\r\n\r\nUpgrade the NATS server if using NATS Accounts.\r\n",
+   "severity": "low",
+   "published": "2021-03-24T15:50:48Z",
+   "cwes": [
+    "CWE-476"
+   ],
+   "ranges": [
+    ">=2, < 2.1.9"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  },
+  {
+   "ghsa": "GHSA-2c64-vj8g-vwrq",
+   "cve": "CVE-2020-26892",
+   "summary": "Incorrect handling of credential expiry by NATS Server",
+   "description": "(This advisory is canonically https://advisories.nats.io/CVE/CVE-2020-26892.txt )\r\n\r\n## Problem Description\r\n\r\nNATS nats-server through 2020-10-07 has Incorrect Access Control because of how expired credentials are handled.\r\n\r\nThe NATS accounts system has expiration timestamps on credentials; the <https://github.com/nats-io/jwt> library had an API which encouraged misuse and an `IsRevoked()` method which misused its own API.\r\n\r\nA new `IsClaimRevoked()` method has correct handling and the nats-server has been updated to use this.  The old `IsRevoked()` method now always returns true and other client code will have to be updated to avoid calling it.\r\n\r\nThe CVE identifier should cover any application using the old JWT API, where the nats-server is one of those applications.\r\n\r\n\r\n## Affected versions\r\n\r\n#### JWT library\r\n\r\n * all versions prior to 1.1.0\r\n * fixed after nats-io/jwt PR 103 landed (2020-10-06)\r\n\r\n#### NATS Server\r\n\r\n * Version 2 prior to 2.1.9\r\n   + 2.0.0 through and including 2.1.8 are vulnerable.\r\n * fixed with nats-io/nats-server PRs 1632, 1635, 1645\r\n\r\n\r\n## Impact\r\n\r\nTime-based credential expiry did not work.\r\n\r\n\r\n## Workaround\r\n\r\nHave credentials which only expire after fixes can be deployed.\r\n\r\n\r\n## Solution\r\n\r\nUpgrade the JWT dependency in any application using it.\r\n\r\nUpgrade the NATS server if using NATS Accounts.",
+   "severity": "high",
+   "published": "2021-03-24T15:42:02Z",
+   "cwes": [
+    "CWE-284"
+   ],
+   "ranges": [
+    "< 2.1.9"
+   ],
+   "fix_commits": [],
+   "fix_files": []
+  }
+ ]
+}

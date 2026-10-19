@@ -1,0 +1,8 @@
+{
+ "id": "cncf-emissary-ingress",
+ "tier": "cncf",
+ "system": "Formerly known as the Ambassador API Gateway,[Emissary-Ingress](https://www.getambassador.io)([emissary](https://github.com/emissary-ingress/emissary/tree/master )) project is an open-source API gateway that is native to Kubernetes that lets you control inbound traffic to your apps in a Kubernetes c",
+ "source": "emissary-ingress/self-assessment.md",
+ "expected": 8,
+ "design_words": 4840
+}

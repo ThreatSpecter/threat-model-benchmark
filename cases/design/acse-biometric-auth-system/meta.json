@@ -1,0 +1,8 @@
+{
+ "id": "acse-biometric-auth-system",
+ "tier": "acse",
+ "system": "Serverless Biometric Authentication System \u2014 an AWS deployment (biometric auth system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval biometric-auth-system",
+ "expected": 11,
+ "design_words": 2061
+}

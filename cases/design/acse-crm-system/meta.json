@@ -1,0 +1,8 @@
+{
+ "id": "acse-crm-system",
+ "tier": "acse",
+ "system": "AWS CRM System Architecture \u2014 an AWS deployment (crm system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval crm-system",
+ "expected": 8,
+ "design_words": 2821
+}

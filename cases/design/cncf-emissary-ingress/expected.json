@@ -1,0 +1,10 @@
+[
+ "An outside attacker could do IP address spoofing to bypass access controls and gain information about resources he should not.",
+ "An internal attacker with malicious intent could pose as admin, or user with elevated privileges and gain access to emissary configurations modifying traffic flow.",
+ "An attacker could gain access to Dynamic configuration used by envoy(aDS) and tamper with it leading to rerouting traffic and altered proxy behavior",
+ "An attacker who gained access could tamper with the emissary's dependencies such as envoy-proxy binaries and could affect the behaviour of the system adversely.",
+ "An internal user could take advantage of a vulnerability and perform unauthorized actions such as changing the CRDs or modifying hosts, causing deviation in system behavior and denying any responsibility for it.",
+ "Information leak through metrics, logs.: Emissary-ingress metrics, and logs could have sensitive information, which could be leaked if inadequate controls are in place over access controls. Leading to data breaches. Appropriate access controls in place, encryption for sensitive data and encryption for data in transit could act as mitigations. Denial of Service Threat-07-D: Causing system Outage An internal attacker could find vulnerabilities in poorly configured RBAC and scale emissary pods down to 0, causing system",
+ "Causing system Outage: An internal attacker could find vulnerabilities in poorly configured RBAC and scale emissary pods down to 0, causing system outages. Threat-08-D: Crashing control plane An attacker could find vulnerabilities that can be leveraged to repeatedly crash the control plane components like ambex, and diag. Rate limiting, proxy redundancy, restrictive RBAC policies and availability zone spreads can help. Elevation of Privilege Threat-09-E: An attacker exploiting elevation of privilege in Emissary Ingress",
+ "An attacker exploiting elevation of privilege in Emissary Ingress might gain unauthorized access to and modify various Kubernetes CRDs, affecting the overall security of the whole cluster."
+]

@@ -1,0 +1,8 @@
+{
+ "id": "acse-distributed-graph-processing",
+ "tier": "acse",
+ "system": "Distributed Graph Processing Engine \u2014 an AWS deployment (distributed graph processing): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval distributed-graph-processing",
+ "expected": 5,
+ "design_words": 2028
+}

@@ -1,0 +1,8 @@
+{
+ "id": "acse-big-data-processing-and-analytics-platform",
+ "tier": "acse",
+ "system": "AWS Big Data Architecture \u2014 an AWS deployment (big data processing and analytics platform): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval big-data-processing-and-analytics-platform",
+ "expected": 5,
+ "design_words": 5801
+}

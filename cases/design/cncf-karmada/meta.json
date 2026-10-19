@@ -1,0 +1,8 @@
+{
+ "id": "cncf-karmada",
+ "tier": "cncf",
+ "system": "# Threat Modeling with STRIDE ## Spoofing ### Threat-01-S - Spoofing of Karmada Admin The identity of the Karmada Admin with access to Karmada API-Sever can be spoofed by other users due to stolen credentials or lack of authentication. ### Threat-01-S Recommended mitigations * Karmada API-Sever must",
+ "source": "karmada/threatmodeling.md",
+ "expected": 7,
+ "design_words": 3003
+}

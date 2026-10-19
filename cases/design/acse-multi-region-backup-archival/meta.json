@@ -1,0 +1,8 @@
+{
+ "id": "acse-multi-region-backup-archival",
+ "tier": "acse",
+ "system": "Multi-Region Backup and Archival Solution \u2014 an AWS deployment (multi region backup archival): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval multi-region-backup-archival",
+ "expected": 6,
+ "design_words": 2171
+}

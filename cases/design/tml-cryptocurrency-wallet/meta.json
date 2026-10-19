@@ -1,0 +1,8 @@
+{
+ "id": "tml-cryptocurrency-wallet",
+ "tier": "tml",
+ "system": "Electrum Wallet + Exchange + Blockchain Integration \u2014 All components shown in the diagram, including wallet, exchange backend & API, mobile app, and blockchain integration. Out of scope: user\u2019s OS, hardware device, third-party dependencies not shown. A data flow diagram of a cryptocurrency wallet su",
+ "source": "https://github.com/OWASP/threat-model-cookbook",
+ "expected": 3,
+ "design_words": 163
+}

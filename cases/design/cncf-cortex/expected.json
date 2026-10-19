@@ -1,0 +1,8 @@
+[
+ "Spoofing: Unauthorized access to Cortex components or data.",
+ "Tampering: Unauthorized modification of data or configuration settings.",
+ "Repudiation: Denying the occurrence of certain actions or events within Cortex.",
+ "Information Disclosure: Unauthorized access to sensitive information within Cortex.",
+ "Denial Of Service: Disrupting or degrading the availability of Cortex services.",
+ "Elevation Of Privilege: Unauthorized escalation of user privileges within Cortex."
+]

@@ -1,0 +1,8 @@
+{
+ "id": "acse-social-media-backend",
+ "tier": "acse",
+ "system": "Social Media Platform Architecture \u2014 an AWS deployment (social media backend): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval social-media-backend",
+ "expected": 6,
+ "design_words": 3450
+}

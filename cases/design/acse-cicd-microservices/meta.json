@@ -1,0 +1,8 @@
+{
+ "id": "acse-cicd-microservices",
+ "tier": "acse",
+ "system": "AWS Microservices CI/CD Pipeline Architecture \u2014 an AWS deployment (cicd microservices): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval cicd-microservices",
+ "expected": 7,
+ "design_words": 2903
+}

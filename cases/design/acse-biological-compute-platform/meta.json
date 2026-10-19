@@ -1,0 +1,8 @@
+{
+ "id": "acse-biological-compute-platform",
+ "tier": "acse",
+ "system": "Secure Biological Compute Platform \u2014 an AWS deployment (biological compute platform): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval biological-compute-platform",
+ "expected": 8,
+ "design_words": 2305
+}

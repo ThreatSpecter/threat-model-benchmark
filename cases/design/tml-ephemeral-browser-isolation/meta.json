@@ -1,0 +1,8 @@
+{
+ "id": "tml-ephemeral-browser-isolation",
+ "tier": "tml",
+ "system": "Ephemeral Browser Isolation Platform \u2014 A disposable browser isolation system that treats each browsing session as a short-lived, containerized compute workload. Users access remote browser instances via encrypted streaming protocols, with sessions automatically destroyed after use or expiration. The",
+ "source": "OWASP TML",
+ "expected": 11,
+ "design_words": 259
+}

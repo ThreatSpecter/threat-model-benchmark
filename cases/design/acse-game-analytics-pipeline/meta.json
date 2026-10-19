@@ -1,0 +1,8 @@
+{
+ "id": "acse-game-analytics-pipeline",
+ "tier": "acse",
+ "system": "game analytics pipeline \u2014 an AWS deployment (game analytics pipeline): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval game-analytics-pipeline",
+ "expected": 6,
+ "design_words": 2218
+}

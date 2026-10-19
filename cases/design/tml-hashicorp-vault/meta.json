@@ -1,0 +1,8 @@
+{
+ "id": "tml-hashicorp-vault",
+ "tier": "tml",
+ "system": "HashiCorp Vault \u2014 HashiCorp Vault is a secrets management system that provides secure storage, access control, dynamic credentials, cryptographic operations (Transit), and secret leasing/renewal. A typical deployment consists of Vault clients (applications, CI/CD, operators) communicating over TLS w",
+ "source": "https://github.com/hashicorp/vault",
+ "expected": 8,
+ "design_words": 395
+}

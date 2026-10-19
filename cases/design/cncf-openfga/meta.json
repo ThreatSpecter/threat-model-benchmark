@@ -1,0 +1,8 @@
+{
+ "id": "cncf-openfga",
+ "tier": "cncf",
+ "system": "Implementing access control is a very common requirement when developing applications, where different subjects can perform different actions on different resources. OpenFGA is a high performance and flexible authorization/permission engine that can be used to implement fine grained access control i",
+ "source": "openfga/self-assessment.md",
+ "expected": 10,
+ "design_words": 7986
+}

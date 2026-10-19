@@ -1,0 +1,8 @@
+{
+ "id": "acse-budgeting-application",
+ "tier": "acse",
+ "system": "AWS Budgeting System Architecture \u2014 an AWS deployment (budgeting application): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval budgeting-application",
+ "expected": 6,
+ "design_words": 2725
+}

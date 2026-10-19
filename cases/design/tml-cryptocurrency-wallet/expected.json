@@ -1,0 +1,5 @@
+[
+ "Wallet file exfiltration on compromised device — Malware or a local attacker steals the wallet file from the user device and recovers private keys.",
+ "Exchange API key stolen and abused — An attacker steals trading bot API keys (e.g., via MITM or log leakage) and issues unauthorized trades.",
+ "Malicious or spoofed ElectrumX feeds false blockchain data — A rogue or spoofed ElectrumX server provides incorrect balances/headers, leading the wallet to display or act on false state."
+]

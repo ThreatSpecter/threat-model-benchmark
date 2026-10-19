@@ -1,0 +1,6 @@
+[
+ "Malicious issue payload poisons Forge events — A tenant power user crafts Jira issue data or comments containing oversized or injection payloads that the Forge remote handler forwards to DevArmor.",
+ "Short-lived tokens are stolen and used without authorisation — An attacker intercepts or retrieves Atlassian access tokens from the DevArmor backend and uses them to obtain unauthorised access to customer Atlassian APIs.",
+ "API Gateway overwhelmed by automation — Automated traffic targets the API Gateway endpoints, exhausting concurrency and starving legitimate Forge invocations.",
+ "Temporary tokens exfiltrated from process memory — An attacker that compromises the FastAPI runtime or custom authorizer extracts Atlassian access tokens from memory or debugging interfaces before they are rotated. No CAPEC entry precisely covers live process-memory credential scraping; CAPEC-545 is tagged as the closest available approximate match (its own definition includes 'memory' among target system resources), not a confirmed exact classification."
+]

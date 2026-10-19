@@ -1,0 +1,8 @@
+{
+ "id": "cncf-tikv",
+ "tier": "cncf",
+ "system": "## STRIDE Threat Model | STRIDE Element | Access Controls | Password Protection | Raft Consensus Algorithm | MVCC in TiKV | RocksDB Storage Engine | TiKV Clients | Placement Driver | Timestamp Oracle | Transport-Layer Security (TLS) | Programming Language (Rust) | Authentication | | ----------------",
+ "source": "tikv/tikv-threat-model.md",
+ "expected": 59,
+ "design_words": 3503
+}

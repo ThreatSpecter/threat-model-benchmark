@@ -1,0 +1,8 @@
+{
+ "id": "acse-code-execution-platform",
+ "tier": "acse",
+ "system": "Code Execution Platform Architecture \u2014 an AWS deployment (code execution platform): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval code-execution-platform",
+ "expected": 7,
+ "design_words": 1945
+}

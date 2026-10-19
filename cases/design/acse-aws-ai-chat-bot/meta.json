@@ -1,0 +1,8 @@
+{
+ "id": "acse-aws-ai-chat-bot",
+ "tier": "acse",
+ "system": "aws ai chat bot \u2014 an AWS deployment (aws ai chat bot): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval aws-ai-chat-bot",
+ "expected": 8,
+ "design_words": 3287
+}

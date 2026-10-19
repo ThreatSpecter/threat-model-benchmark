@@ -1,0 +1,8 @@
+{
+ "id": "acse-photo-sharing-app",
+ "tier": "acse",
+ "system": "AWS Photo Sharing Application Architecture \u2014 an AWS deployment (photo sharing app): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval photo-sharing-app",
+ "expected": 8,
+ "design_words": 2237
+}

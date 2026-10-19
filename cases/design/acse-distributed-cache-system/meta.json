@@ -1,0 +1,8 @@
+{
+ "id": "acse-distributed-cache-system",
+ "tier": "acse",
+ "system": "distributed cache system \u2014 an AWS deployment (distributed cache system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval distributed-cache-system",
+ "expected": 7,
+ "design_words": 3843
+}

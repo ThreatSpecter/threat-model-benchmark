@@ -1,0 +1,12 @@
+[
+ "Elevation Of Privilege of openfga.server via improper authorization (impact: high)",
+ "Spoofing of openfga.server via improper authentication (impact: high)",
+ "Information Disclosure of openfga.server, openfga.clients via improper secrets handling/storing (impact: high)",
+ "Denial Of Service of openfga.server via uncontrolled resource consumption (impact: medium)",
+ "Denial Of Service of openfga.server via improper restriction of input (impact: medium)",
+ "Elevation Of Privilege of system.applications via business logic (impact: high)",
+ "Elevation Of Privilege of openfga.server via improper authorization (impact: high)",
+ "Elevation Of Privilege of system.applications via server configuration (impact: medium)",
+ "Elevation Of Privilege of system.applications via improper authorization (impact: low)",
+ "Authorization Bypass of system.applications via business logic (impact: high)"
+]

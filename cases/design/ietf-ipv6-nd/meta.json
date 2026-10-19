@@ -1,0 +1,8 @@
+{
+ "id": "ietf-ipv6-nd",
+ "tier": "ietf",
+ "system": "IPv6 Neighbor Discovery",
+ "source": "RFC 4861 \u2192 RFC 3756",
+ "expected": 12,
+ "design_words": 27055
+}

@@ -1,0 +1,8 @@
+[
+ "Spoofing: Unauthorized entities impersonating legitimate users or services.",
+ "Tampering: Unauthorized modification of data or configurations.",
+ "Repudiation: Actors denying their actions, lacking traceability or accountability.",
+ "Information Disclosure: Unauthorized access to sensitive information.",
+ "Denial Of Service: Disruption of service availability.",
+ "Elevation Of Privilege: Unauthorized users gaining elevated access or privileges."
+]

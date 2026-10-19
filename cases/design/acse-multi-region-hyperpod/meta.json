@@ -1,0 +1,8 @@
+{
+ "id": "acse-multi-region-hyperpod",
+ "tier": "acse",
+ "system": "multi region hyperpod \u2014 an AWS deployment (multi region hyperpod): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval multi-region-hyperpod",
+ "expected": 5,
+ "design_words": 1883
+}

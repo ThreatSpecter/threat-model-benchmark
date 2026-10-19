@@ -1,0 +1,8 @@
+{
+ "id": "acse-serverless-cicd",
+ "tier": "acse",
+ "system": "serverless cicd \u2014 an AWS deployment (serverless cicd): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval serverless-cicd",
+ "expected": 6,
+ "design_words": 2373
+}

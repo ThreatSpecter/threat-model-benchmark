@@ -1,0 +1,8 @@
+{
+ "id": "acse-data-viz-platform",
+ "tier": "acse",
+ "system": "data viz platform \u2014 an AWS deployment (data viz platform): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval data-viz-platform",
+ "expected": 5,
+ "design_words": 2119
+}

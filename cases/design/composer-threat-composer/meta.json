@@ -1,0 +1,8 @@
+{
+ "id": "composer-threat-composer",
+ "tier": "composer",
+ "system": "**Motivation for externalizing this threat model:** `We've included this example threat model to support a training workshop to instruct participants on how you can use Threat Composer to perform feature-based threat modeling. We have chosen the threat composer tool itself as an example to illustrat",
+ "source": "awslabs/threat-composer ThreatComposerWorkspace-reinforce2024-ex2.tc.json",
+ "expected": 25,
+ "design_words": 1771
+}

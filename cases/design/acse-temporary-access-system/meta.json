@@ -1,0 +1,8 @@
+{
+ "id": "acse-temporary-access-system",
+ "tier": "acse",
+ "system": "AWS Temporary Elevated Access Architecture \u2014 an AWS deployment (temporary access system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval temporary-access-system",
+ "expected": 6,
+ "design_words": 2508
+}

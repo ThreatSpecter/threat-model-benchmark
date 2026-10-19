@@ -1,0 +1,8 @@
+{
+ "id": "acse-aws-vdi-architecture",
+ "tier": "acse",
+ "system": "AWS Virtual Desktop Infrastructure (VDI) Architecture \u2014 an AWS deployment (aws vdi architecture): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval aws-vdi-architecture",
+ "expected": 8,
+ "design_words": 2247
+}

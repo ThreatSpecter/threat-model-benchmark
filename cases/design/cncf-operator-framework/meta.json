@@ -1,0 +1,8 @@
+{
+ "id": "cncf-operator-framework",
+ "tier": "cncf",
+ "system": "Operator Framework is an open-source toolkit that provides the runtime environment and software development kit (SDK) for building and running Kubernetes applications, dubbed \u201cOperators\u201d, in an effective and easily scalable way. Built on top of Kubernetes, Operators use kubernetes as a framework to ",
+ "source": "operator-framework/self-assessment.md",
+ "expected": 7,
+ "design_words": 3360
+}

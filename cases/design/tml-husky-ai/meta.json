@@ -1,0 +1,8 @@
+{
+ "id": "tml-husky-ai",
+ "tier": "tml",
+ "system": "Husky AI \u2014 A machine learning system to classify Huskies vs dogs. HuskyAI is a machine learning system designed to classify images and distinguish between huskies and non-huskies. It integrates secure data handling practices with a robust convolutional neural network (CNN) for image recognition. Sec",
+ "source": "https://github.com/wunderwuzzi23/huskyai",
+ "expected": 9,
+ "design_words": 509
+}

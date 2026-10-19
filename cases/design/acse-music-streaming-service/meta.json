@@ -1,0 +1,8 @@
+{
+ "id": "acse-music-streaming-service",
+ "tier": "acse",
+ "system": "Music Streaming Service Architecture \u2014 an AWS deployment (music streaming service): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval music-streaming-service",
+ "expected": 7,
+ "design_words": 2965
+}

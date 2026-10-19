@@ -1,0 +1,8 @@
+{
+ "id": "acse-simple-image-upload-download-website",
+ "tier": "acse",
+ "system": "simple image upload download website \u2014 an AWS deployment (simple image upload download website): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval simple-image-upload-download-website",
+ "expected": 5,
+ "design_words": 1737
+}

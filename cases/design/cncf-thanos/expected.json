@@ -1,0 +1,7 @@
+[
+ "Spoofing Identity: An unknown source pretends to be a trusted source to gain access to Thanos components.",
+ "Repudiation: Repudiation of actions performed on the Thanos system",
+ "Information Disclosure: Unauthorized access to metric data.",
+ "Denial Of Service: Disrupt the availability of Thanos services.",
+ "Denial Of Service: An attacker can change their status to perform actions only meant for certain trusted users."
+]

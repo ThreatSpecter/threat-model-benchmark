@@ -1,0 +1,13 @@
+[
+ "Persistent tracking and fingerprinting across sessions — Tracking networks use cookies, IndexedDB, local storage, and browser fingerprinting to correlate user identity across sessions, undermining privacy guarantees.",
+ "Credential and token leakage via session persistence — OAuth tokens, session cookies, and saved credentials persist in browser storage, creating risk of theft if session is compromised or storage not properly destroyed.",
+ "Malware attempting to persist across session destruction — Drive-by malware, cryptominers, or persistent XSS payloads attempt to survive session termination by exploiting storage, network callbacks, or browser engine bugs.",
+ "Shared endpoint exploitation for session reuse — Attackers on public Wi-Fi or shared workstations attempt to hijack active sessions or extract credentials from endpoint memory or cache.",
+ "Unauthorized session creation via control plane compromise — Attacker exploits control plane vulnerabilities or stolen credentials to create unauthorized sessions, bypass rate limits, or disable audit logging.",
+ "Session TTL bypass for indefinite session extension — Attacker or compromised user manipulates session lifecycle to bypass TTL enforcement, maintaining long-lived sessions that accumulate tracking data.",
+ "Container escape to access other sessions or host system — Attacker exploits container runtime or kernel vulnerabilities to escape isolation, access other sessions, or compromise host infrastructure.",
+ "Streaming layer interception exposing browser session content — Attacker intercepts or decrypts video stream to observe user browsing activity, credentials entered, or sensitive information displayed.",
+ "Resource exhaustion denial of service — Attacker floods control plane with session requests or maintains excessive concurrent sessions to exhaust compute resources and prevent legitimate usage.",
+ "Incomplete session cleanup leaving residual artifacts — Container destruction fails to fully remove ephemeral storage, leaving cookies, cache, or credentials accessible to subsequent sessions on same host.",
+ "Browser engine zero-day exploitation — Attacker exploits unpatched browser vulnerability to achieve remote code execution, sandbox escape, or information disclosure within session."
+]

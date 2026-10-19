@@ -1,0 +1,8 @@
+{
+ "id": "acse-support-ticketing-system",
+ "tier": "acse",
+ "system": "support ticketing system \u2014 an AWS deployment (support ticketing system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval support-ticketing-system",
+ "expected": 5,
+ "design_words": 1852
+}

@@ -1,0 +1,8 @@
+{
+ "id": "acse-live-streaming-platform",
+ "tier": "acse",
+ "system": "AWS Live Streaming Platform Architecture \u2014 an AWS deployment (live streaming platform): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval live-streaming-platform",
+ "expected": 8,
+ "design_words": 1904
+}

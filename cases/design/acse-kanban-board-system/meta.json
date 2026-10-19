@@ -1,0 +1,8 @@
+{
+ "id": "acse-kanban-board-system",
+ "tier": "acse",
+ "system": "Scalable Kanban Board Architecture \u2014 an AWS deployment (kanban board system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval kanban-board-system",
+ "expected": 5,
+ "design_words": 2344
+}

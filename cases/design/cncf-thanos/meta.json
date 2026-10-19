@@ -1,0 +1,8 @@
+{
+ "id": "cncf-thanos",
+ "tier": "cncf",
+ "system": "Thanos as a tool extends the capabilities of the Prometheus monitoring tool. Refer [[1]](#references) It does so by providing: * Global View: Thanos allows you to have a global view of your Prometheus metrics. It enables you to query metrics from multiple Prometheus instances across different cluste",
+ "source": "thanos/self-assessment.md",
+ "expected": 5,
+ "design_words": 4112
+}

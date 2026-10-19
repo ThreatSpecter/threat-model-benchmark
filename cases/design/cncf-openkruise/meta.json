@@ -1,0 +1,8 @@
+{
+ "id": "cncf-openkruise",
+ "tier": "cncf",
+ "system": "# OpenKruise Threat Model Threat Modeling with STRIDE ## Spoofing - Threat-01-S: Impersonating an Administrator - An attacker could impersonate an OpenKruise admin, maintainer, or somebody with elevated privilege in order to access data within the containers, code repositories, or contributions from",
+ "source": "openkruise/threat-model.md",
+ "expected": 6,
+ "design_words": 2865
+}

@@ -1,0 +1,8 @@
+{
+ "id": "acse-transit-gateway",
+ "tier": "acse",
+ "system": "transit gateway \u2014 an AWS deployment (transit gateway): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval transit-gateway",
+ "expected": 5,
+ "design_words": 2339
+}

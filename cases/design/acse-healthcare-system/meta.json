@@ -1,0 +1,8 @@
+{
+ "id": "acse-healthcare-system",
+ "tier": "acse",
+ "system": "healthcare system \u2014 an AWS deployment (healthcare system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval healthcare-system",
+ "expected": 6,
+ "design_words": 2035
+}

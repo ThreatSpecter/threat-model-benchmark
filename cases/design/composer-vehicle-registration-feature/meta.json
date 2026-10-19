@@ -1,0 +1,8 @@
+{
+ "id": "composer-vehicle-registration-feature",
+ "tier": "composer",
+ "system": "**Notes:** _This is one of several examples demonstrating how you might use Threat Composer when working through AWS' Threat Modeling for Builders training. It is intentionally incomplete and is only used as a reference starting point. You may have different perspectives on the assumptions, threats ",
+ "source": "awslabs/threat-composer ThreatModelingForBuilders-Exercise3.tc.json",
+ "expected": 10,
+ "design_words": 596
+}

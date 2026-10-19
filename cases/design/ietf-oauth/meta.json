@@ -1,0 +1,8 @@
+{
+ "id": "ietf-oauth",
+ "tier": "ietf",
+ "system": "The OAuth 2.0 authorization framework",
+ "source": "RFC 6749 \u2192 RFC 6819",
+ "expected": 50,
+ "design_words": 16331
+}

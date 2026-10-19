@@ -1,0 +1,8 @@
+{
+ "id": "acse-serverless-anomaly-detection-system",
+ "tier": "acse",
+ "system": "AWS Serverless Real-Time Anomaly Detection \u2014 an AWS deployment (serverless anomaly detection system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval serverless-anomaly-detection-system",
+ "expected": 8,
+ "design_words": 2293
+}

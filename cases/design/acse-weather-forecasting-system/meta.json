@@ -1,0 +1,8 @@
+{
+ "id": "acse-weather-forecasting-system",
+ "tier": "acse",
+ "system": "Weather Forecasting System Architecture \u2014 an AWS deployment (weather forecasting system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval weather-forecasting-system",
+ "expected": 8,
+ "design_words": 2981
+}

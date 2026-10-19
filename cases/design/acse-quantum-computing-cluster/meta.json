@@ -1,0 +1,8 @@
+{
+ "id": "acse-quantum-computing-cluster",
+ "tier": "acse",
+ "system": "AWS Quantum Computing Cluster for Cryptographic Processing \u2014 an AWS deployment (quantum computing cluster): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval quantum-computing-cluster",
+ "expected": 6,
+ "design_words": 2690
+}

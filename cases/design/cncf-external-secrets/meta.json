@@ -1,0 +1,8 @@
+{
+ "id": "cncf-external-secrets",
+ "tier": "cncf",
+ "system": "## External Secrets Operator (ESO) Threat Modeling using STRIDE #### Spoofing ##### Threat-01-S - Spoofing of External Secrets Operator A malicious actor might attempt to impersonate the External System Operator (ESO) to illicitly access confidential information stored in external systems. ##### Thr",
+ "source": "external-secrets/docs/stride-threat-model.md",
+ "expected": 11,
+ "design_words": 3111
+}

@@ -1,0 +1,8 @@
+{
+ "id": "acse-serverless-payment-processing-system",
+ "tier": "acse",
+ "system": "Enterprise Payment Processing Platform \u2014 an AWS deployment (serverless payment processing system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval serverless-payment-processing-system",
+ "expected": 7,
+ "design_words": 2607
+}

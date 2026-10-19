@@ -1,0 +1,8 @@
+{
+ "id": "acse-content-localization",
+ "tier": "acse",
+ "system": "content localization \u2014 an AWS deployment (content localization): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval content-localization",
+ "expected": 6,
+ "design_words": 2160
+}

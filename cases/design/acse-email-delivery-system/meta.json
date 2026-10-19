@@ -1,0 +1,8 @@
+{
+ "id": "acse-email-delivery-system",
+ "tier": "acse",
+ "system": "email delivery system \u2014 an AWS deployment (email delivery system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval email-delivery-system",
+ "expected": 7,
+ "design_words": 3248
+}

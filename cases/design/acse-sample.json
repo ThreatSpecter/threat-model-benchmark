@@ -1,0 +1,25 @@
+{
+ "_": "The acse suite's fixed sample: every fifth ACSE-Eval scenario in name order, chosen 2026-10-08 and kept so runs compare.",
+ "sample": [
+  "acse-app-runner",
+  "acse-biological-compute-platform",
+  "acse-cicd-microservices",
+  "acse-content-localization",
+  "acse-datazone-arch",
+  "acse-distributed-storage",
+  "acse-enhanced-document-understanding",
+  "acse-gaming-screenshot-processor",
+  "acse-hybrid-integration",
+  "acse-kanban-board-system",
+  "acse-multi-region-active-active-db",
+  "acse-multi-region-hyperpod",
+  "acse-orgs-assessment-system",
+  "acse-qa-chatbot",
+  "acse-recommendation-engine",
+  "acse-search-engine",
+  "acse-serverless-etl-pipeline",
+  "acse-simple-image-upload-download-website",
+  "acse-support-ticketing-system",
+  "acse-version-control"
+ ]
+}

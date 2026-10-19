@@ -1,0 +1,8 @@
+{
+ "id": "acse-efs-filesystem",
+ "tier": "acse",
+ "system": "efs filesystem \u2014 an AWS deployment (efs filesystem): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval efs-filesystem",
+ "expected": 5,
+ "design_words": 1818
+}

@@ -1,0 +1,8 @@
+{
+ "id": "acse-recommendation-engine",
+ "tier": "acse",
+ "system": "recommendation engine \u2014 an AWS deployment (recommendation engine): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval recommendation-engine",
+ "expected": 6,
+ "design_words": 2729
+}

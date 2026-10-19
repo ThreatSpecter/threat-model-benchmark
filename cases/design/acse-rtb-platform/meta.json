@@ -1,0 +1,8 @@
+{
+ "id": "acse-rtb-platform",
+ "tier": "acse",
+ "system": "AWS Real-time Bidding Platform \u2014 an AWS deployment (rtb platform): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval rtb-platform",
+ "expected": 7,
+ "design_words": 4571
+}

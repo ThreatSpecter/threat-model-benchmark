@@ -1,0 +1,8 @@
+{
+ "id": "acse-centralized-network-inspection",
+ "tier": "acse",
+ "system": "Centralized Network Inspection on AWS \u2014 an AWS deployment (centralized network inspection): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval centralized-network-inspection",
+ "expected": 8,
+ "design_words": 1877
+}

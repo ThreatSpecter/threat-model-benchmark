@@ -1,0 +1,8 @@
+{
+ "id": "composer-sample-generative-ai-chatbot-application",
+ "tier": "composer",
+ "system": "\n\n### Disclaimers\n\n_**1. Motivation for externalizing this threat model:**_\n\n_This example threat model for a 'Generative AI Chatbot Application' is informational only and provided \"as is\" with no representations or warranties whatsoever, and may change at any time due to a variety of factors, such ",
+ "source": "awslabs/threat-composer ThreatComposer_Workshop_GenAI-ex3.tc.json",
+ "expected": 37,
+ "design_words": 1929
+}

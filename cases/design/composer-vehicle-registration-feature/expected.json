@@ -1,0 +1,12 @@
+[
+ "A threat actor can use an error in authorization logic can perform a threat action, which leads to the ability to perform actions they should not be authorized to perform, negatively impacting vehicle registration, vehicle listing, registration status, and vehicle registration documents",
+ "A threat actor with access to modify network traffic can manipulate API parameter input, which leads to the API Gateway performing actions on another user's resources, resulting in reduced integrity and/or confidentiality of vehicle registration, vehicle listing, registration status, and vehicle registration documents",
+ "A threat actor with access to an IAM Principal who can modify access to the S3 bucket can cause data in the Amazon S3 bucket to be deleted, resulting in reduced availability of vehicle registration documents",
+ "A threat actor with access to an IAM Principal who can modify access to the DynamoDB tables can delete the data, resulting in reduced availability of vehicle registration, vehicle listing, and registration status",
+ "A threat actor who is able to access the AWS Lambda function logs can find sensitive data captured within the logs, resulting in reduced confidentiality of vehicle registration, vehicle listing, registration status, and vehicle registration documents",
+ "A threat actor who is authenticated and can make API requests can read information they should not be authorized to read, resulting in reduced confidentiality of vehicle registration, vehicle listing, registration status, and vehicle registration documents",
+ "A threat actor who can register a vehicle can claim they did not do so, which leads to the actor disputing financial charges related to the registration of a vehicle, resulting in reduced integrity of billing data",
+ "A threat actor with access to data in transit between the user and the Amazon S3 bucket can read or modify that data, resulting in reduced confidentiality and/or integrity of vehicle registration documents",
+ "A threat actor who is able to access the DynamoDB tables can access sensitive data, resulting in reduced confidentiality of vehicle registration, vehicle listing, and registration status",
+ "A threat actor with possession of a similar domain name can trick our users into interacting with a fake endpoint, which leads to interception of valid API requests, negatively impacting vehicle registration, vehicle listing, registration status, and vehicle registration documents"
+]

@@ -1,0 +1,4 @@
+[
+ {"repo": "openfga/openfga", "tag": "v1.8.0", "why": "an authorisation server; 13 later advisories whose fixed code exists in this release"},
+ {"repo": "nats-io/nats-server", "tag": "v2.2.0", "why": "a messaging server with its own protocols; 30 later advisories"}
+]

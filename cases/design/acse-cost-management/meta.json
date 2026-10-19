@@ -1,0 +1,8 @@
+{
+ "id": "acse-cost-management",
+ "tier": "acse",
+ "system": "cost management \u2014 an AWS deployment (cost management): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval cost-management",
+ "expected": 5,
+ "design_words": 1591
+}

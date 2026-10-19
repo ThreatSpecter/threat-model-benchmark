@@ -1,0 +1,8 @@
+{
+ "id": "acse-contact-center-platform",
+ "tier": "acse",
+ "system": "contact center platform \u2014 an AWS deployment (contact center platform): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval contact-center-platform",
+ "expected": 5,
+ "design_words": 2860
+}

@@ -1,0 +1,8 @@
+{
+ "id": "acse-document-management-system",
+ "tier": "acse",
+ "system": "AWS Large-scale Document Management System \u2014 an AWS deployment (document management system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval document-management-system",
+ "expected": 7,
+ "design_words": 3238
+}

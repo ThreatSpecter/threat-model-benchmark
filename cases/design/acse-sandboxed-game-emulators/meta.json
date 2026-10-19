@@ -1,0 +1,8 @@
+{
+ "id": "acse-sandboxed-game-emulators",
+ "tier": "acse",
+ "system": "Sandboxed Video Game Emulator Architecture \u2014 an AWS deployment (sandboxed game emulators): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval sandboxed-game-emulators",
+ "expected": 5,
+ "design_words": 1966
+}

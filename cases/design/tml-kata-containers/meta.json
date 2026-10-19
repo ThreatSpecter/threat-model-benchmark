@@ -1,0 +1,8 @@
+{
+ "id": "tml-kata-containers",
+ "tier": "tml",
+ "system": "Kata Containers \u2014 Hardware Virtualisation Isolation Layer \u2014 Kata Containers provides a second layer of isolation on top of traditional container isolation by running each pod inside a lightweight virtual machine. This scope covers the attack surface of the hardware virtualisation interface \u2014 specifi",
+ "source": "https://github.com/kata-containers/kata-containers",
+ "expected": 27,
+ "design_words": 326
+}

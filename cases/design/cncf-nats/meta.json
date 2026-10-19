@@ -1,0 +1,8 @@
+{
+ "id": "cncf-nats",
+ "tier": "cncf",
+ "system": "# Threat Modeling with STRIDE ### 1. Spoofing - **Threat:** Unauthorized entities impersonating legitimate users or services. - **Case:** Vulnerability \"Adding accounts for just the system account adds auth bypass\" ([GHSA-fr2g-9hjm-wr23](https://github.com/advisories/GHSA-fr2g-9hjm-wr23)) indicates ",
+ "source": "nats/doc/threat-modeling.md",
+ "expected": 6,
+ "design_words": 4350
+}

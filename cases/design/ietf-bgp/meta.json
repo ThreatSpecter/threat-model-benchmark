@@ -1,0 +1,8 @@
+{
+ "id": "ietf-bgp",
+ "tier": "ietf",
+ "system": "BGP-4, the Border Gateway Protocol",
+ "source": "RFC 4271 \u2192 RFC 4272",
+ "expected": 16,
+ "design_words": 27752
+}

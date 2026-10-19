@@ -1,0 +1,8 @@
+{
+ "id": "acse-multi-region-consensus-protocol",
+ "tier": "acse",
+ "system": "Multi-Region File System Consensus Protocol \u2014 an AWS deployment (multi region consensus protocol): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval multi-region-consensus-protocol",
+ "expected": 5,
+ "design_words": 1986
+}

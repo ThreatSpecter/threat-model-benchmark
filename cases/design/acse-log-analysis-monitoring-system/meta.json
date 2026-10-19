@@ -1,0 +1,8 @@
+{
+ "id": "acse-log-analysis-monitoring-system",
+ "tier": "acse",
+ "system": "AWS Log Analysis and Monitoring System \u2014 an AWS deployment (log analysis monitoring system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval log-analysis-monitoring-system",
+ "expected": 6,
+ "design_words": 2345
+}

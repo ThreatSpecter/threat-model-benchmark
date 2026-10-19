@@ -1,0 +1,8 @@
+{
+ "id": "acse-eks-outposts",
+ "tier": "acse",
+ "system": "EKS Local Clusters on AWS Outposts \u2014 an AWS deployment (eks outposts): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval eks-outposts",
+ "expected": 6,
+ "design_words": 2070
+}

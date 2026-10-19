@@ -1,0 +1,9 @@
+[
+ "Spoofing of Karmada Admin: The identity of the Karmada Admin with access to Karmada API-Sever can be spoofed by other users due to stolen credentials or lack of authentication.",
+ "Spoofing of a Karmada API-Sever: When a worker cluster is created, a user could somehow interfere with it and send instructions to it as Karmada API-Sever, this can happen through Karmada Agent or kube-apiserver (depending push or pull mode). If the user could gain access to the Karmada worker cluster, it can allow the user to gain access to secrets they should not be able to.",
+ "Tampering of Karmada: Karmada components (API Server, Agent, Controller Manager and Scheduler) and configuration files (ETCD) can be tampered during build time, installation or runtime.",
+ "Tampering of Communication to Karmada Worker Cluster: The communication from Karmada Control Plane to Karmada Worker Cluster can be tampered during transit. This can allow malicious actors to modify the commands sent by the Karmada Control Plane to Karmada Agent or kube-apiserver (depending push or pull mode).",
+ "Repudiation of actions performed by Karmada Admin: Karmada Admin has highly privileged access to cloud and cluster resources. Misuse of permissions via actions performed by Karmada Admin should be detectable and logged for auditing purposes.",
+ "Exhausting Cloud resources: A user within the network of Karmada environment can send incessant requests to Karmada worker cluster making it unavailable to Karmada Contorl Plane.",
+ "Using create cluster permission to get cluster admin access: Someone with create cluster permissions can elevate their access by locating the credentials that can give cluster-admin access to the attacker."
+]

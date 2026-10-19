@@ -1,0 +1,8 @@
+{
+ "id": "ietf-ntp",
+ "tier": "ietf",
+ "system": "The Network Time Protocol, version 4",
+ "source": "RFC 5905 \u2192 RFC 7384",
+ "expected": 12,
+ "design_words": 27830
+}

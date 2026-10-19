@@ -1,0 +1,8 @@
+{
+ "id": "acse-image-video-recognition-system",
+ "tier": "acse",
+ "system": "AWS Image and Video Recognition System \u2014 an AWS deployment (image video recognition system): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval image-video-recognition-system",
+ "expected": 6,
+ "design_words": 2392
+}

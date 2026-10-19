@@ -1,0 +1,8 @@
+{
+ "id": "acse-iot-predictive-maintenance",
+ "tier": "acse",
+ "system": "iot predictive maintenance \u2014 an AWS deployment (iot predictive maintenance): the architecture diagram, the code that drew it and the CDK that deploys it",
+ "source": "ACSE-Eval/ACSE-Eval iot-predictive-maintenance",
+ "expected": 5,
+ "design_words": 2739
+}
